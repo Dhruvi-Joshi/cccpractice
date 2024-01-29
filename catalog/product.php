@@ -99,10 +99,13 @@ if(isset($_GET['no'])) {
                <!-- <a href="functions.php?edit=?php echo $no;?" >edit</a>-->
 
                <?php if(isset($no)) { ?>
-                <a href="functions.php?edit=<?php echo $no; ?>">Edit</a>
-               
+                <input type="hidden" name="no" value="<?php echo $no; ?>">
+               <!-- <a href="functions.php?edit= echo $no; ?>">Edit</a>-->
+                <input type="submit" name="update" value="update"style="color:blue; font-size:150%;border-radius:80px;">
                 <!--<button onclick="">Edit</button>-->
                 <?php } ?>
+
+                
             </form>
 </body>
 </html>

@@ -3,7 +3,7 @@ error_reporting(E_ERROR | E_PARSE);
 require('connection.php');
 require('functions.php');
 
-$select=select('ccc_product');
+$select=selectproduct('ccc_product');
 //delete('ccc_product',['product_id'=>]);
 $result=$conn -> query($select);
 if($result){

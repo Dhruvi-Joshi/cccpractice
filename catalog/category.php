@@ -45,7 +45,7 @@
         <label>Category Name:</label>
         <input type="text" name="cat[name]" placeholder="Enter category name" required><br><br>
 
-        <input type="submit" name="submit" value="submit"style="color:blue; font-size:150%;border-radius:80px;">
+        <input type="submit" name="cat_submit" value="submit"style="color:blue; font-size:150%;border-radius:80px;">
     </form>
 </body>
 </html>
