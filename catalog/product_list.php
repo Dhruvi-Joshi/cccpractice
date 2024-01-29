@@ -2,14 +2,17 @@
 error_reporting(E_ERROR | E_PARSE);
 require('connection.php');
 require('functions.php');
+$column=array("product_id","`product_name`","`sku`","`category`");
+$condition="ORDER BY product_id DESC LIMIT 20;";
+$select=sel('ccc_product',$column,$condition);
 
-$select=selectproduct('ccc_product');
+//$select=selectproduct('ccc_product');
 //delete('ccc_product',['product_id'=>]);
 $result=$conn -> query($select);
 if($result){
     
     //echo "<script>alert('Data show successfully');</script>";
-    echo '<table style="margin:50px;">';
+    echo '<table>';
 
     echo"<tr>";
     $row=$result->fetch_assoc();

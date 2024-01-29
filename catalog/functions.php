@@ -2,13 +2,23 @@
 error_reporting(E_ERROR | E_PARSE);
 require('connection.php');
 
-
-
-
-function selectproduct($table){
-    return "SELECT `product_id`,`product_name`, `sku`, `category` FROM {$table} ORDER BY update_at DESC LIMIT 20;";echo"<br>";
-    //return "SELECT * FROM {$table};";
+function sel($table,$columns,$condition){
+    
+    $col=[];
+    foreach($columns as $_field){
+            $col[]="{$_field}";
+            //$values[]="'".addslashes($_value)."'";
+    }
+    $cols = implode(",",$col);
+    return "SELECT {$cols} FROM {$table} $condition";
 }
+
+
+// function selectproduct($table){
+//     echo "SELECT `product_id`,`product_name`, `sku`, `category` FROM {$table} ORDER BY update_at DESC LIMIT 20;";echo"<br>";
+//     return "SELECT `product_id`,`product_name`, `sku`, `category` FROM {$table} ORDER BY update_at DESC LIMIT 20;";echo"<br>";
+//     //return "SELECT * FROM {$table};";
+// }
 
 function select($table){
        return "SELECT * FROM {$table};";
