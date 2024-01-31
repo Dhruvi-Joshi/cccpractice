@@ -45,6 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $insert=insert('ccc_product',$data);
                 if($conn->query($insert)=== TRUE){
                     echo "<script>alert('Data inserted successfully');</script>";
+                    header("location: product_list.php");
                 }
                 else{             
                     echo "Error: " . $insert . "<br>" . mysqli_error($conn);
@@ -56,6 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $cat_insert=insert('ccc_category',$cat);
                 if($conn->query($cat_insert)=== TRUE){
                     echo "<script>alert('Category Data inserted successfully');</script>";
+                    header("location: category_list.php");
                 }
                 else{             
                     echo "Error: " . $cat_insert . "<br>" . mysqli_error($conn);
@@ -83,6 +85,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $update=update('ccc_product',$data,['product_id'=>$no]);
                 if($conn->query($update)=== TRUE){
                     echo "<script>alert('Data update successfully');</script>";
+                    header("location: product_list.php");
                 }
                 else{             
                     echo "Error: " . $update . "<br>" . mysqli_error($conn);
@@ -105,7 +108,8 @@ if(isset($_GET['id'])) {
 
         $delete=delete('ccc_product',['product_id'=>$id]);
         if($conn->query($delete)=== TRUE){
-            echo "<script>alert('Data delete successfully');</script>";   
+            echo "<script>alert('Data delete successfully');</script>"; 
+            header("location: product_list.php");  
         }
         else{             
             echo "Error: " . $delete . "<br>" . mysqli_error($conn);

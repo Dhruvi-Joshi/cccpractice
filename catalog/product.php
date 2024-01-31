@@ -3,6 +3,8 @@ error_reporting(E_ERROR | E_PARSE);
 require('connection.php');
 require('functions.php');
 
+
+
 if(isset($_GET['no'])) {
     $no = $_GET['no'];
     echo $no;

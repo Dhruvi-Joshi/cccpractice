@@ -17,12 +17,12 @@ if($result){
     echo"<tr>";
     $row=$result->fetch_assoc();
         foreach($row as $_field=>$_values){
-            echo "<th>" . $_field . "</th>";
+            echo "<th style='padding: 10px;'>" . $_field . "</th>";
           //  echo "Update";
            // echo "Delete";
         }
-        echo "<th>"."Update"."</th>";
-        echo "<th>"."Delete"."</th>";
+        echo "<th style='padding: 10px;'>"."Update"."</th>";
+        echo "<th style='padding: 10px;'>"."Delete"."</th>";
     echo"</tr>";
     
     $result->data_seek(0);
@@ -34,7 +34,7 @@ if($result){
             }
             echo "<td style='padding: 10px;'><a href='product.php?no=" . $row['product_id'] . "'>Edit</a></td>";
         echo "<td style='padding: 10px;'><a href='functions.php?id=" . $row['product_id'] . "'>Delete</a></td>";
-       
+    
         
         echo"</tr>";
     }
