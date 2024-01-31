@@ -2,7 +2,7 @@
 
 //simple calculator
 
-class calculator{
+public class calculator{
     public function add($a,$b){
         return $a+$b;
     }
