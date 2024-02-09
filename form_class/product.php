@@ -18,6 +18,22 @@ if($execatinsert){
 echo $execatinsert;
 }
 
+if(isset($_POST['update'])){
+    $table='ccc_product';
+    $data=$_POST['data'];
+    $no=$_POST['no'];
+    $condition = ['product_id'=>$no];
+    echo $data;
+    $query = $operation->update($table,$data,$condition);
+    echo $query;
+
+$execatinsert=$execute->execute($conn,$query);
+if($execatinsert){
+    echo "<script>alert('Data inserted successfully');</script>";
+                    header("location: product_list.php");
+}
+echo $execatinsert;
+}
 
 if(isset($_GET['no'])) {
     $no = $_GET['no'];

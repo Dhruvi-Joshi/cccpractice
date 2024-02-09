@@ -23,6 +23,14 @@ function sel($table,$columns,$condition){
 function select($table){
        return "SELECT * FROM {$table};";
 }
+// function selectt($table,$columns,$condition){
+//     $col=[];
+//     foreach($columns as $_field){
+//             $col[]="{$_field}";
+//     }
+//     $cols = implode(",",$col);
+//     return "SELECT {$cols} FROM {$table} $condition";
+//     }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $data=$_POST['data'];

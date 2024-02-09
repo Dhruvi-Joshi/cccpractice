@@ -35,6 +35,9 @@ class executer{
                         echo "<td style='padding: 10px;'>" . $_values . "</td>";
                         
                     }
+                    echo "<td style='padding: 10px;'><a href='product.php?no=" . $row['product_id'] . "'>Edit</a></td>";
+                    echo "<td style='padding: 10px;'><a href='functions.php?id=" . $row['product_id'] . "'>Delete</a></td>";
+                
                 echo"</tr>";
             }
             echo "</table>";
