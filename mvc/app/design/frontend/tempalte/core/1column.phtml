@@ -4,10 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=html, initial-scale=1.0">
     <title>Document</title>
+
     <?php echo $this->getChildHtml('head')?>
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 <body>
+    
      <?php echo $this->getRequest()->getParams("pid");?> 
     <div class="header"><?php echo $this->getChildHtml('header')?></div>
     <div class="content">

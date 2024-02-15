@@ -9,7 +9,6 @@ class Core_Block_Abstract{
     }
 
     public function getTemplate(){
-        //this->template = $template;
         return $this->template;
     }
 
