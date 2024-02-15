@@ -1,0 +1,15 @@
+<h1>head.phtml</h1>
+<?php echo get_class($this); ?>
+<?php $js=$this->getJs(); ?>
+<?php if(count($js)):?>
+    <?php foreach($js as $_js):?>
+        <script type="" src="<?php echo $_js;?>"></script>
+    <?php endforeach; ?>
+<?php endif;?>
+
+<?php $css=$this->getCss(); ?>
+<?php if(count($css)):?>
+    <?php foreach($css as $_css):?>
+        <script type="" src="<?php echo $_css;?>"></script>
+    <?php endforeach; ?>
+<?php endif;?>
