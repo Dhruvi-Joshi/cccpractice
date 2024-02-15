@@ -1,12 +1,16 @@
 <?php
 class Core_Block_Abstract{
 
-    public function setTemplate( $template ) {
+    public $template;
+    public $data=[];
 
+    public function setTemplate($template) {
+        $this->template = $template;
     }
 
     public function getTemplate(){
-
+        //this->template = $template;
+        return $this->template;
     }
 
     public function __get($key){
@@ -38,11 +42,11 @@ class Core_Block_Abstract{
     }
 
     public function getRequest(){
-
+        return Mage::getModel('core/request');
     }
 
     public function render(){
-        
+        include Mage::getBaseDir('app').'/design/frontend/tempalte/'.$this->getTemplate();
     }
 }
 ?>
