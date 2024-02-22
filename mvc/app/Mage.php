@@ -42,8 +42,13 @@ class Mage{
 
     public static function getBaseDir($subDir=null){
         if($subDir){
+            //echo "hi";echo self::$baseDir.'/'.$subDir;
             return self::$baseDir.'/'.$subDir;
         }
+        return self::$baseDir;
+    }
+
+    public static function getBaseUrl(){
         return self::$baseDir;
     }
 
