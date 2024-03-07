@@ -1,0 +1,39 @@
+<?php
+
+
+$bannerCollection = Mage::getModel('banner/banner')->getCollection();
+print_r($bannerCollection->getData());
+//  foreach($bannerCollection->getData() as $product) { 
+//echo Mage::getBaseUrl().'media/banner/'.$product->getBanner_Image(); 
+ 
+ ?>
+<div id="carouselExampleInterval2" class="carousel slide" data-mdb-ride="carousel"
+  data-mdb-interval="false">
+  <div class="carousel-inner">
+    <?php foreach($bannerCollection->getData() as $key =>$product) { ?>
+    <div class="carousel-item <?php echo ($key == 0) ? 'active' : ''; ?>">
+      <img src="<?php echo Mage::getBaseUrl().'media/banner/'.$product->getBanner_Image(); ?>" class="d-block w-100"
+        alt="Wild Landscape" />
+        <input type="text" value="<?php echo  Mage::getBaseUrl().'media/banner/'.$product->getBanner_Image();  ?>">
+    </div>
+
+    <?php }?>
+    <!-- <div class="carousel-item">
+      <img src="https://mdbcdn.b-cdn.net/img/new/slides/042.webp" class="d-block w-100" alt="Camera" />
+    </div>
+    <div class="carousel-item">
+      <img src="https://mdbcdn.b-cdn.net/img/new/slides/043.webp" class="d-block w-100"
+        alt="Exotic Fruits" />
+    </div> -->
+  </div>
+  <button class="carousel-control-prev" data-mdb-target="#carouselExampleInterval2" type="button"
+    data-mdb-slide="prev" style="background-color: #007bff; border: none;">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" data-mdb-target="#carouselExampleInterval2" type="button"
+    data-mdb-slide="next" style="background-color: #007bff; border: none;">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>

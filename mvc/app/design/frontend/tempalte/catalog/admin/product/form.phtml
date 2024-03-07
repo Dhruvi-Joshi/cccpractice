@@ -1,0 +1,143 @@
+ <?php
+//  Mage::getSingleton('core/session')->get('customerId');
+// Mage::getSingleton('core/session')->remove('customerId');
+ //echo $this;
+//  echo get_class();
+$product_model = $this->getProduct();
+// $id=$product_model->getId();
+// echo $id;
+// $value=$product_model->getsku();
+// echo $value;
+ ?><html>
+<head>
+    <title>PRODUCT BILL</title>
+</head>
+<style>
+     /* body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: pink; 
+        } */
+
+     form {
+            width: 50%;
+            text-align: center;
+           
+        }
+
+    
+        label {
+            color:blue;
+            display: inline-block;
+            width: 150px;
+            margin-right: 10px;
+            text-align: left;
+        }
+        input, select {
+            width: 200px;
+        }
+        #but{
+            width: 15px;
+            margin-left: 35px;
+            
+        }
+
+
+
+</style>
+<body>
+    <!-- <form method="POST" action="<php echo $this->getUrl("catalog/product/save") ?>"> -->
+    <form method="POST" action="<?php echo $this->getUrl("admin/catalog_product/save") ?>">
+    <!-- <php print_r($this) ?> -->
+    <h1 style= "color:blue; font-size:200%;">Product Form</h1>
+
+    <label>Product Id:</label>
+                <input type="text" name="data[product_id]" value="<?php echo $product_model->getid()?>"><br><br>
+       
+       
+                
+    <label>SKU:</label>
+                <input type="text" name="data[sku]" value="<?php echo $product_model->getsku()?>"><br><br>
+        
+    <label>Product Name:</label>
+                <input type="text" name="data[name]" placeholder="Enter product name" value="<?php echo $product_model->getname()?>"required><br><br>
+                
+    <label>Color:</label>
+                <input type="text" name="data[color]" placeholder="Enter color" value="<?php echo $product_model->getcolor()?>"><br><br>
+
+    <label>size:</label>
+                <input type="text" name="data[size]" placeholder="size" value="<?php echo $product_model->getsize()?>"><br><br>
+        
+    <label>description:</label>
+                <input type="textarea" name="data[description]" placeholder="description" value="<?php echo $product_model->getdescription()?>"><br><br>
+        
+    <label>image link:</label>
+                <input type="text" name="data[image_link]" placeholder="image link" value="<?php echo $product_model->getimage_link()?>"><br><br>
+           
+    <label>link:</label>
+                <input type="text" name="data[link]" placeholder="link" value="<?php echo $product_model->getlink()?>"><br><br>
+               
+    <label>Category:</label>
+                <select name="data[Category_id]">
+
+                <option value="1"<?php echo(($product_model->getCategory())=='bar & game room')?"selected":''; ?>>bar & game room</option>
+                <option value="2"<?php echo(($product_model->getCategory())=='bedroom')?"selected":''; ?>>bedroom</option>
+                <option value="3"<?php echo(($product_model->getCategory())=='decor')?"selected":''; ?>>decor</option>
+                <option value="4"<?php echo(($product_model->getCategory())=='dining & kitchen')?"selected":''; ?>>dining & kitchen</option>
+                <option value="5"<?php echo(($product_model->getCategory())=='lighting')?"selected":''; ?>>lighting</option>
+                <option value="6"<?php echo(($product_model->getCategory())=='living room')?"selected":''; ?>>living room</option>
+                <option value="7"<?php echo(($product_model->getCategory())=='mattresses')?"selected":''; ?>>mattresses</option>
+                <option value="8"<?php echo(($product_model->getCategory())=='office')?"selected":''; ?>>office</option>
+                <option value="9"<?php echo(($product_model->getCategory())=='outdoor')?"selected":''; ?>>outdoor</option>
+                 
+                    <!-- <option value="1">bar & game room</option>
+                    <option value="2">bedroom</option>
+                    <option value="3">decor</option>
+                    <option value="4">dining & kitchen</option>
+                    <option value="5">lighting</option>
+                    <option value="6">living room</option>
+                    <option value="7">mattresses</option>
+                    <option value="8">office</option>
+                    <option value="9">outdoor</option> -->
+                </select><br><br>
+
+    <label>Price:</label>
+                <input type="text" name="data[price]" placeholder="enter price" value="<?php echo $product_model->getprice()?>"><br><br>
+        
+    <label>Manufacturer Cost:</label>
+                <input type="text" name="data[mfr_cost]" placeholder="enter manufacturer cost" value="<?php echo $product_model->getmfr_cost()?>"><br><br>
+        
+    <label>Shipping Cost:</label>
+                <input type="text" name="data[shipping_cost]" placeholder="enter shipping cost" value="<?php echo $product_model->getshipping_cost()?>"><br><br>
+        
+    <label>Total Cost:</label>
+                <input type="text" name="data[total_cost]" placeholder="enter total cost" value="<?php echo $product_model->gettotal_cost()?>"><br><br>
+
+    <label>Margin percentage:</label>
+                <input type="text" name="data[margin_percentage]" placeholder="enter total cost" value="<?php echo $product_model->getmargin_percentage()?>"><br><br>
+
+    <label>Min price:</label>
+                <input type="text" name="data[min_price]" placeholder="enter total cost" value="<?php echo $product_model->getmin_price()?>"><br><br>
+        
+                
+    <label>Status</label>
+                <select name="data[status]" >
+                    <option value="0"<?php echo(($product_model->getStatus())=='Enabled')?"selected":''; ?>>Enabled</option>
+                    <option value="1"<?php echo(($product_model->getStatus())=='Disabled')?"selected":''; ?>>Disabled</option>
+                    
+                    
+                    <!-- <option value="1">Disabled</option> -->
+                </select><br><br>
+        
+                
+        
+                <input type="submit" name="submit" value="submit"style="color:blue; font-size:150%;border-radius:80px;">
+               <!-- <a href="functions.php?edit=?php echo $no;?" >edit</a>-->
+
+             
+
+                
+            </form>
+</body>
+</html> 

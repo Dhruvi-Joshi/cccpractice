@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=html, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+    <title>Admin</title>
+
+    <?php echo $this->getChildHtml('head')?>
+    <!-- <script type="text/javascript" src="https://code.jquery.com/jquery-3.7.1.min.js"></script> -->
+      <script type="text/javascript" src="<?php echo Mage::getBaseUrl().'skin/js/jquery-3.7.1.min.js'?>">
+    </script>
+</head>
+<body>
+    
+     <?php echo $this->getRequest()->getParams("pid");?> 
+    <div class="header"><?php echo $this->getChildHtml('header')?></div>
+    <div class="content">
+        <div class="left"></div> 
+        <div class="content"><?php echo $this->getChildHtml('content')?></div>
+         <div class="right"></div>
+    </div>
+    <div class="footer"><?php echo $this->getChildHtml('footer')?></div>
+
+    
+</body>
+</html>

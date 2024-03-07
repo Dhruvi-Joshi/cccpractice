@@ -13,38 +13,41 @@ class Core_Block_Abstract{
     }
 
     public function __get($key){
-
+        return isset($this->data[$key])?$this->data[$key]:null;
     }
 
     public function __unset($key){
-
+        unset($this->data[$key]);
     }
 
     public function __set($key, $value){
-
+        $this->data[$key]=$value;
     }
 
     public function addData($key,$value){
-
+        $this->data[$key]=$value;
     }
 
     public function getData($key=null){
-
+        return $this->data;
     }
 
     public function setData($data){
-
+        $this->data=$data;
+        return $this;
     }
 
-    public function getUrl($action=null,$controller=null,$params=[],$resetparams=false){
+    // public function getUrl($action=null,$controller=null,$params=[],$resetparams=false){
 
-    }
+    // }
 
     public function getRequest(){
         return Mage::getModel('core/request');
     }
 
     public function render(){
+        
+         //echo Mage::getBaseDir('app').'/design/frontend/tempalte/'.$this->getTemplate();
         include Mage::getBaseDir('app').'/design/frontend/tempalte/'.$this->getTemplate();
     }
 }

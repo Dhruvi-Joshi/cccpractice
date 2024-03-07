@@ -1,2 +1,14 @@
 <h1>content.phtml</h1>
-<?php echo get_class($this); ?>
+<pre>
+   
+<?php 
+$productModel=Mage::getModel("Catalog/product");
+//$productModel=Mage::getModel("Catalog/product")->load(140);
+// print_r($productModel->getId());
+// echo "<br>";
+// print_r($productModel->getproduct_name());
+// echo "<br>";
+// print_r($productModel);
+?>
+
+<div><?php $this->getChildHtml('') ?></div>

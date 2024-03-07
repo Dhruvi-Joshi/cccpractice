@@ -1,0 +1,57 @@
+<?php
+
+
+$bannerCollection = Mage::getModel('banner/banner')->getCollection();
+ foreach($bannerCollection->getData() as $product) { 
+echo Mage::getBaseUrl().'media/banner/'.$product->getBanner_Image(); 
+ }
+    //->addFieldToFilter('total_cost',['gt'=> 5]);
+    // if (count($productCollection->getData()) == 0) {
+    //     $error = "not data found";
+    // }
+
+    
+
+    // foreach ($productCollection->getData() as $product) {
+    //     var_dump($product);
+
+    //   var_dump($product->getsku());
+?>
+
+<table>
+<div class="table" style="margin-top:20px;">
+    <table border="1px solid black">
+        <tr>
+            <th>id</th>
+            <th>title</th>
+            <th>image</th>
+            <th>status</th>
+            <th>show on</th>
+            
+
+            
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        <tr style="text-align: center;"><td colspan="17"><?php echo $error ?></td></tr>
+        <?php foreach($bannerCollection->getData() as $product) { ?>
+
+            
+        <tr>
+        <td><?php print_r($product->getBanner_Id());?></td>
+        <td><?php print_r($product->getTitle());?></td>
+         <td>
+        <img src="<?php echo Mage::getBaseUrl().'media/banner/'.$product->getBanner_Image(); ?>" alt="Banner Image" style="width: 50px; height: auto;"></td>
+        <td><?php print_r($product->getStatus());?></td>
+        <td><?php print_r($product->getShow_On());?></td>
+        
+
+        <td><button class="edit-button"><a href='<?php echo $this->getUrl('admin/banner/form')?>?id=<?php echo $product->getBanner_Id()?>'>Edit</a></button></td>
+        <td><button class="delete-button"><a href='<?php echo $this->getUrl('admin/banner/delete')?>?id=<?php echo $product->getBanner_Id()?>'>Delete</a></button></td>
+        </tr>
+        <?php } ?>
+    </table>
+</div>
+
+
+

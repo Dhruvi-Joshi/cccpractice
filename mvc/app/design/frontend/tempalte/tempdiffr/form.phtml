@@ -1,0 +1,96 @@
+<?php
+
+
+?>
+<!-- value="<php echo $product_model->getid()?>" -->
+<html>
+<head>
+    <title>Temp</title>
+</head>
+<style>
+     /* body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: pink; 
+        } */
+
+     form {
+            width: 50%;
+            text-align: center;
+           
+        }
+
+    
+        label {
+            color:blue;
+            display: inline-block;
+            width: 150px;
+            margin-right: 10px;
+            text-align: left;
+        }
+        input, select {
+            width: 200px;
+        }
+        #but{
+            width: 15px;
+            margin-left: 35px;
+            
+        }
+
+
+
+</style>
+<body>
+    <!-- <form method="POST" action="<php echo $this->getUrl("catalog/product/save") ?>"> -->
+    <form method="POST" action="<?php echo $this->getUrl("tempdiffr/temp/save") ?>">
+    <!-- <php print_r($this) ?> -->
+    <h1 style= "color:blue; font-size:200%;">Temp Form</h1>
+
+    <label>Id:</label>
+                <input type="text" name="temp[id]" value=""><br><br>
+       
+       
+                
+    <label>User Name:</label>
+                <input type="text" name="temp[user_name]" ><br><br>
+               
+    <label>Temprature 1:</label>
+                <input type="text" name="temp[temprature_one]" ><br><br>
+
+    <label>Unit 1:</label>
+               
+                <select name="temp[unit_one]" >
+                    <option value='celsius'>celsius</option>
+                    <option value='fahrenheit'>fahrenheit</option>
+                    <option value='kelvin'>kelvin</option>
+                </select><br><br>
+        
+    <label>Temprature 2:</label>
+                <input type="textarea" name="temp[temprature_two]"  ><br><br>
+        
+    <label>Unit 2:</label>
+            
+                <select name="temp[unit_two]" >
+                    <option value='celsius'>celsius</option>
+                    <option value='fahrenheit'>fahrenheit</option>
+                    <option value='kelvin'>kelvin</option>
+                </select><br><br>
+
+    <label>Oprations:</label>
+    <select name="temp[opration]" >
+                    <option value='add'>Addition</option>
+                    <option value='sub'>Sub</option>
+                </select><br><br>
+        
+                
+        
+                <input type="submit" name="submit" value="submit"style="color:blue; font-size:150%;border-radius:80px;">
+               <!-- <a href="functions.php?edit=?php echo $no;?" >edit</a>-->
+
+             
+
+                
+            </form>
+</body>
+</html> 

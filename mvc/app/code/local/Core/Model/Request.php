@@ -23,13 +23,13 @@ class Core_Model_Request{
         $this->_actionName=isset($uri[3])?$uri[3]:'index';
 
     }
-    public function getParams($key= ''){
+    public function getParams($key= '',$arg =null){
         //return $_REQUEST;
         return ($key =='')
         ?$_REQUEST
           :(isset($_REQUEST[$key])
              ?$_REQUEST[$key]
-               :''
+               :((!is_null($arg))?$arg:'')
             );
     }
 
@@ -81,6 +81,13 @@ class Core_Model_Request{
         // $req=str_replace("/cyber/practice/","",$request);
         // return $req;
         
+    }
+
+    public function getUrl($path){
+   // return 'http:localhost'.$_SERVER['SCRIPT_NAME']."/".$path;
+        //return $this->getRequestUri()."/".$path;
+
+        return 'http://localhost/cyber/mvc/'.$path;
     }
 
     public function getControllerClass(){

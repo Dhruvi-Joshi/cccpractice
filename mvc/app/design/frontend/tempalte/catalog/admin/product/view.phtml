@@ -1,0 +1,39 @@
+<?php
+
+$error = "";
+if(isset($_GET['id'])){
+     $no = $_GET['id'];    
+}else{
+ $error= "select product id";
+}
+
+
+
+
+$productCollection = Mage::getModel('catalog/product')->getCollection()
+     ->addFieldToFilter('product_id',$no);
+   
+?>
+<div class="product-details">
+    <?php foreach ($productCollection->getData() as $product) { ?>
+        <div class="product-item">
+            <div><strong>Name:</strong> <?php echo $product->getname(); ?></div>
+            <div><strong>Description:</strong> <?php echo $product->getdescription(); ?></div>
+            <div><strong>Image Link:</strong> <?php echo $product->getimage_link(); ?></div>
+            <div><strong>Image:</strong> <img src="<?php echo $product->getimage_link(); ?>" alt="Product Image" style="max-width: 100px; max-height: 100px;"></div>
+            <div><strong>Price:</strong> <?php echo $product->getprice(); ?></div>
+            <div><strong>Color:</strong> <?php echo $product->getcolor(); ?></div>
+            <div><strong>Size:</strong> <?php echo $product->getsize(); ?></div>
+            <div><strong>Total Cost:</strong> <?php echo $product->gettotal_cost(); ?></div>
+
+            <form action="<?php echo $this->getUrl("sales/quote/add") ?>" method="post">
+                <label for="quantity">Quantity:</label>
+                <input type="number" id="quantity" name="cart[qty]" value="1" min="1">
+                <input type="text" name="cart[product_id]" value="<?php echo $product->getproduct_id(); ?>">
+
+              
+                <button type="submit">Add to Cart</button>
+            </form>
+        </div>
+    <?php } ?>
+</div>

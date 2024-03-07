@@ -1,0 +1,65 @@
+<?php
+
+$productCollection = Mage::getModel('catalog/product')->getCollection();
+    //->addFieldToFilter('name','ty');
+
+    // foreach ($productCollection->getData() as $product) {
+    //     var_dump($product);
+
+    //   var_dump($product->getsku());
+?>
+
+<table>
+<div class="table" style="margin-top:20px;">
+    <table border="1px solid black">
+        <tr>
+            <th>id</th>
+            <th>sku</th>
+            <th>name</th>
+            <th>color</th>
+            <th>size</th>
+            <th>description</th>
+            <th>image link</th>
+            <th>link</th>
+            <th>Price</th>
+            <th>mfr_cost</th>
+            <th>shipping cost</th>
+            <th>total cost</th>
+            <th>margin percentage</th>
+            <th>margin price</th>
+            
+
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+
+        <?php foreach($productCollection->getData() as $product) { ?>
+
+            <tr>
+            <td><?php print_r($product->getid());?></td>
+            <td><?php print_r($product->getsku());?></td>
+            <td><?php print_r($product->getname());?></td>
+            <td><?php print_r($product->getcolor());?></td>
+            <td><?php print_r($product->getsize());?></td>
+            <td><?php print_r($product->getdescription());?></td>
+            <td><?php print_r($product->getimage_link());?></td>
+            <td><?php print_r($product->getlink()); ?></td>
+            <td><?php print_r($product->getprice());?></td>
+            <td><?php print_r($product->getmfr_cost());?></td>
+            <td><?php print_r($product->getshipping_cost());?></td>
+            <td><?php print_r($product->gettotal_cost());?></td>
+            <td><?php print_r($product->getmargin_percentage());?></td>
+            <td><?php print_r($product->getmin_price());?></td>
+
+
+            <td><button class="edit-button"><a href='<?php echo $this->getUrl('admin/catalog_product/form')?>?id=<?php echo $product->getId()?>'>Edit</a></button></td>
+            <td><button class="delete-button"><a href='<?php echo $this->getUrl('admin/catalog_product/delete')?>?id=<?php echo $product->getId()?>'>Delete</a></button></td>
+            </tr>
+            <?php } ?>
+    </table>
+</div>
+
+</table>
+
+    
+

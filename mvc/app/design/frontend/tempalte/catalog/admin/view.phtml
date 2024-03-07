@@ -1,0 +1,87 @@
+<?php
+
+$error = "";
+if(isset($_GET['id'])){
+     $no = $_GET['id'];     
+}else{
+ $error= "select category";
+}
+
+// $test=array('where'=>'');
+// var_dump(isset($test['where']));
+
+// die;
+
+
+$productCollection = Mage::getModel('catalog/product')->getCollection()
+    ->addFieldToFilter('category_id',$no);
+    $productCollection->groupBy('total_cost');
+    //->addFieldToFilter('total_cost',['gt'=> 5]);
+    // if (count($productCollection->getData()) == 0) {
+    //     $error = "not data found";
+    // }
+
+    
+
+    // foreach ($productCollection->getData() as $product) {
+    //     var_dump($product);
+
+    //   var_dump($product->getsku());
+?>
+
+<table>
+<div class="table" style="margin-top:20px;">
+    <table border="1px solid black">
+        <tr>
+            <th>id</th>
+            <th>sku</th>
+            <th>name</th>
+            <th>color</th>
+            <th>size</th>
+            <th>description</th>
+            <th>image link</th>
+            <th>link</th>
+            <th>Price</th>
+            <th>mfr_cost</th>
+            <th>shipping cost</th>
+            <th>total cost</th>
+            <th>margin percentage</th>
+            <th>margin price</th>
+            
+
+            <th>View</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        <tr style="text-align: center;"><td colspan="17"><?php echo $error ?></td></tr>
+        <?php foreach($productCollection->getData() as $product) { ?>
+
+            
+        <tr>
+        <td><?php print_r($product->getid());?></td>
+        <td><?php print_r($product->getsku());?></td>
+        <td><?php print_r($product->getName());?></td>
+        <td><?php print_r($product->getcolor());?></td>
+        <td><?php print_r($product->getsize());?></td>
+        <td><?php print_r($product->getdescription());?></td>
+        <td><?php print_r($product->getimage_link());?></td>
+        <td><?php print_r($product->getlink()); ?></td>
+        <td><?php print_r($product->getprice());?></td>
+        <td><?php print_r($product->getMfr_Cost());?></td>
+        <td><?php print_r($product->getshipping_cost());?></td>
+        <td><?php print_r($product->gettotal_cost());?></td>
+        <td><?php print_r($product->getmargin_percentage());?></td>
+        <td><?php print_r($product->getmin_price());?></td>
+
+        <td><button><a href='<?php echo $this->getUrl('catalog/product/view')?>?id=<?php echo $product->getId()?>'>View</a></button></td>
+        <td><button class="edit-button"><a href='<?php echo $this->getUrl('admin/catalog_product/form')?>?id=<?php echo $product->getId()?>'>Edit</a></button></td>
+        <td><button class="delete-button"><a href='<?php echo $this->getUrl('admin/catalog_product/delete')?>?id=<?php echo $product->getId()?>'>Delete</a></button></td>
+        </tr>
+        <?php } ?>
+    </table>
+</div>
+
+
+
+
+

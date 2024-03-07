@@ -1,0 +1,75 @@
+<?php
+//  Mage::getSingleton('core/session')->get('customerId');
+
+ //echo $this;
+// $product_model = $this->getProduct();
+// $id=$product_model->getId();
+// echo $id;
+// $value=$product_model->getsku();
+// echo $value;
+ 
+?>
+<!-- value="<php echo $product_model->getid()?>" -->
+<html>
+<head>
+    <title>Admin</title>
+</head>
+<style>
+     /* body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: pink; 
+        } */
+
+     form {
+            width: 50%;
+            text-align: center;
+           
+        }
+
+    
+        label {
+            color:blue;
+            display: inline-block;
+            width: 150px;
+            margin-right: 10px;
+            text-align: left;
+        }
+        input, select {
+            width: 200px;
+        }
+        #but{
+            width: 15px;
+            margin-left: 35px;
+            
+        }
+
+
+
+</style>
+<body>
+    <!-- <form method="POST" action="<php echo $this->getUrl("catalog/product/save") ?>"> -->
+    <form method="POST" action="<?php echo $this->getUrl("admin/account/login") ?>">
+    <!-- <php print_r($this) ?> -->
+    <h1 style= "color:blue; font-size:200%;">Admin Login</h1>
+
+                
+    <label>Admin Username:</label>
+                <input type="text" name="admin[username]" placeholder="enter username"><br><br>
+
+    <label>Password:</label>
+                <input type="text" name="admin[password]" placeholder="enter password" ><br><br>
+     
+               
+         
+        
+                <input type="submit" name="submit" value="submit"style="color:blue; font-size:150%;border-radius:80px;">
+               <!-- <a href="functions.php?edit=?php echo $no;?" >edit</a>-->
+
+             
+
+                
+            </form>
+</body>
+</html> 
