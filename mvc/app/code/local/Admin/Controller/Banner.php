@@ -21,11 +21,11 @@ class Admin_Controller_Banner extends Core_Controller_Front_Action{
 
     public function saveAction(){
         
-        echo "<pre>";
+        //echo "<pre>";
         $data=$this->getRequest()->getParams('banner');
-        echo "<pre>";
+       // echo "<pre>";
         print_r($_FILES);
-        echo "</pre>";  
+        // echo "</pre>";  
         //echo $_FILES['banner']['name']['banner_image'];
         $data['banner_image'] = $_FILES['banner']['name']['banner_image']; 
         print_r($data);
@@ -44,7 +44,7 @@ class Admin_Controller_Banner extends Core_Controller_Front_Action{
             }   
             $bannerModel = Mage::getModel('banner/banner'); 
             $bannerModel->setData($data)->save();
-            print_r($bannerModel);
+            //print_r($bannerModel);
             
 
         }

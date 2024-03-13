@@ -1,9 +1,9 @@
-<h1>head.phtml</h1>
+<!-- <h1>head.phtml</h1> -->
  <!-- <php echo get_class($this); ?>  -->
 <?php $js=$this->getJs(); ?>
 <?php if(count($js)):?>
     <?php foreach($js as $_js):?>
-        <script type="" src="<?php echo "../../".$_js;?>"></script>
+        <script type="" src="<?php echo $_js;?>"></script>
         <!-- <php echo $_js;?> -->
     <?php endforeach; ?>
 <?php endif;?>
@@ -11,7 +11,8 @@
 <?php $css=$this->getCss(); ?>
 <?php if(count($css)):?>
     <?php foreach($css as $_css):?>
-        <!-- <script type="stylesheet" src="<php echo $_css;?>"></script> -->
+        <!-- <script type="stylesheet" src="<php echo "../../".$_css;?>"></script> -->
+         <!-- <link rel="stylesheet" href="<php echo "/cyber/mvc/skin/".$_css;?>"> -->
          <link rel="stylesheet" href="<?php echo $_css;?>">
       <!-- <script type="stylesheet" src="<php echo $_css;?>"></script>  -->
 

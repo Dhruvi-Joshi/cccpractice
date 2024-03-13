@@ -1,0 +1,139 @@
+    <?php
+
+    $id=$this->getCart();
+
+    $quoteCollection=$this->getQuote();
+    $itemCollection=$this->getproduct();
+    // $quoteCollection = Mage::getModel('cart/cart')->getCollection()
+    //                         ->addFieldToFilter('quote_id',$id);
+        
+    // $itemCollection= Mage::getModel('sales/quote_item')->getCollection()
+    //                    ->addFieldToFilter('quote_id',$id);
+
+                    $itemArray = $itemCollection->getData();
+                        $itemCount = count($itemArray);
+                    //   $count= count($itemCollection);
+                    
+                        
+                        // foreach ($itemCollection->getData() as $abc) { 
+                        //     echo $abc->getPrice();
+                        //     echo $abc->getQty();
+                        //     echo $abc->getRow_total();
+                        //         $productCollection = Mage::getModel('catalog/product')->getCollection()
+                        //                             ->addFieldToFilter('product_id',$abc->getProduct_id());
+                        //         foreach($productCollection->getData() as $products){
+                        //             echo $products->getName();
+                        //             echo $products->getColor();
+
+                        //         }
+
+                        //     }
+
+
+
+    ?>
+    <section class="vh-100">
+            <div class="container h-100">
+                <div class="row d-flex justify-content-center align-items-center h-100">
+                    <div class="col">
+                        <p><span class="h2">Shopping Cart </span><span class="h4">(<?php echo $itemCount; ?> items)</span></p>
+
+                        <div class="card mb-4">
+                            <div class="card-body p-4">
+
+                            <?php foreach ($itemCollection->getData() as $items) { 
+                                $productCollection = Mage::getModel('catalog/product')->getCollection()
+                                ->addFieldToFilter('product_id',$items->getProduct_id());?>
+                                
+                                <?php foreach($productCollection->getData() as $products){ ?>
+                                
+                                  <div class="row align-items-center">
+                                    <div class="col-md-2"><img src="<?php echo Mage::getBaseUrl().'media/product/pro4.jpg';?>"
+                                            class="img-fluid" alt="Generic placeholder image">
+                                
+                                    </div>
+                                    
+                                   
+
+                                    <div class="col-md-1 d-flex justify-content-center">
+                                        <div>
+                                            <p class="small text-muted mb-4 pb-5">Name</p>
+                                            <p class="lead fw-normal mb-0"><?php echo $products->getName();?></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 d-flex justify-content-center">
+                                        <div>
+                                            <p class="small text-muted mb-4 pb-5">Color</p>
+                                            <p class="lead fw-normal mb-0"><?php echo $products->getColor();?></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 d-flex justify-content-center">
+                                        <div>
+                                            <p class="small text-muted mb-4 pb-5">Quantity</p>
+                                            <p class="lead fw-normal mb-0"><button onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
+                                                class="plus">+</button><input class="quantity fw-bold text-black" min="1" name="quantity" value="<?php echo $items->getQty(); ?>"
+                                                type="number" style="width:50px;text-align:center;"><button onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
+                                                class="minus">-</button></p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-2 d-flex justify-content-center">
+                                        <div>
+                                            <p class="small text-muted mb-4 pb-5">Price</p>
+                                            <p class="lead fw-normal mb-0"><?php echo $items->getPrice(); ?></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 d-flex justify-content-center">
+                                        <div>
+                                            <p class="small text-muted mb-4 pb-5">Total</p>
+                                            <p class="lead fw-normal mb-0"><?php echo $items->getRow_Total();?></p>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-1 d-flex justify-content-center">
+                                        <div>
+                                            <p class="small text-muted mb-4 pb-5">delete</p>
+                                            <a href="delete" style="color:black;"><button type="button" class="btn btn-outline-danger" name="deleteItem">Delete</button></a>
+
+                                        </div>
+                                    </div>
+                                    
+                                    
+
+                                
+
+                                    
+                                </div><br><br>
+                                    <?php } ?>
+                                <?php } ?>
+                            </div>
+                        </div>
+
+                        <div class="card mb-5" > <!-- Set background color here -->
+                            <div class="card-body p-4">
+
+                            <?php foreach ($quoteCollection->getData() as $quotePrice) { ?>
+                                <div class="float-end">
+                                    <!-- Change the text color of the order total -->
+                                    <p class="mb-0 me-5 d-flex align-items-center">
+                                        <span class="small text-muted me-2" style="color: #333;">Order total:</span> <span
+                                            class="lead fw-normal" style="color: #333;"><?php echo $quotePrice->getGrand_Total(); ?></span>
+                                    </p>
+                                </div>
+
+                            <?php } ?>
+
+                            </div>
+                        </div>
+
+                        
+                        <div class="d-flex justify-content-end">
+                            <button type="button" class="btn btn-light btn-lg me-2">Continue shopping</button>
+                            <a href="checkout" style="color:black;"><button type="button" class="btn btn-primary btn-lg">Checkout</button></a>
+                        </div>
+                        <br><br>
+
+                    </div>
+                </div>
+            </div>
+        </section>

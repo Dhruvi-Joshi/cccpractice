@@ -19,7 +19,7 @@ class Page_Controller_Index extends Core_Controller_Front_Action{
 
     public function testAction(){
         //echo "123";
-        echo "<pre>";
+        // echo "<pre>";
         //var_dump($_SESSION);
         $productModel=Mage::getSingleton('core/session');
         //->set('customerId',1);

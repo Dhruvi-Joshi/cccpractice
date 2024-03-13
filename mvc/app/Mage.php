@@ -28,7 +28,7 @@ class Mage{
     public static function getBlock($className){
         $className=str_replace("/","_Block_",$className);
         $className=ucwords(str_replace("/","_",$className),"_");
-        echo $className;
+        //echo $className;
         return new $className();
     }
 

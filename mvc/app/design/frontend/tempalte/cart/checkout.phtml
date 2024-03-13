@@ -1,0 +1,237 @@
+<?php
+
+$id=$this->getCart();
+$customer=$this->getCustomer();
+$quoteCollection=$this->getQuote();
+$itemCollection=$this->getproduct();
+//print_r($customer);
+
+// $quoteCollection = Mage::getModel('cart/cart')->getCollection()
+                        // ->addFieldToFilter('quote_id',$id);
+       
+// $itemCollection= Mage::getModel('sales/quote_item')->getCollection()
+                  //  ->addFieldToFilter('quote_id',$id);
+                    
+
+                   $itemArray = $itemCollection->getData();
+                   $itemCount = count($itemArray);
+?>
+<br><br>
+<div class="row">
+  
+    <div class="col-md-4 order-md-1 mb-4" style="padding-left:40px;">
+      <h4 class="d-flex justify-content-between align-items-center mb-3">
+        <span class="text-muted">Your cart</span>
+        <span class="badge badge-secondary badge-pill"><?php echo $itemCount ?></span>
+      </h4>
+                  
+      <ul class="list-group mb-3">
+      <?php foreach ($itemCollection->getData() as $items) { 
+                             $productCollection = Mage::getModel('catalog/product')->getCollection()
+                             ->addFieldToFilter('product_id',$items->getProduct_id());?>
+                             
+                             <?php foreach($productCollection->getData() as $products){ ?>
+                
+        <li class="list-group-item d-flex justify-content-between lh-condensed">
+        
+
+        
+         <div>    
+         <h6 class="my-0"><?php echo $products->getName();?></h6>
+         <img src="<?php echo Mage::getBaseUrl().'media/product/pro4.jpg';?>" style="height:80px;width:80px;">
+            <small class="text-muted"><span class="font-weight-bold">Price:</span><?php echo $items->getPrice();?></small>
+            <small class="text-muted"><span class="font-weight-bold">Quentity:</span><?php echo $items->getQty();?></small>
+          </div>
+          <span class="text-muted"><?php echo $items->getRow_Total();?></span>
+        </li>
+        <!-- <li class="list-group-item d-flex justify-content-between lh-condensed">
+          <div>
+            <h6 class="my-0">Second product</h6>
+            <small class="text-muted">Brief description</small>
+          </div>
+          <span class="text-muted">$8</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between lh-condensed">
+          <div>
+            <h6 class="my-0">Third item</h6>
+            <small class="text-muted">Brief description</small>
+          </div>
+          <span class="text-muted">$5</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between bg-light">
+          <div class="text-success">
+            <h6 class="my-0">Promo code</h6>
+            <small>EXAMPLECODE</small>
+          </div>
+          <span class="text-success">-$5</span>
+        </li> -->
+        
+        <?php } ?>
+        <?php } ?>
+        <?php foreach ($quoteCollection->getData() as $quotePrice) { ?>
+        <li class="list-group-item d-flex justify-content-between">
+          <span>Total </span>
+          <strong><?php echo $quotePrice->getgrand_total(); ?></strong>
+        </li>
+       <?php } ?>
+                                
+      </ul>
+                              
+
+      <!--<form class="card p-2">
+         <div class="input-group">
+          <input type="text" class="form-control" placeholder="Promo code">
+          <div class="input-group-append">
+            <button type="submit" class="btn btn-secondary">Redeem</button>
+          </div>
+        </div>
+      </form> -->
+    </div>
+    <div class="col-md-7 order-md-2" style="padding-left:40px;">
+      <h4 class="mb-3">Billing address</h4>
+      <form method="POST" action="<?php echo $this->getUrl('sales/quote/save') ?>" class="needs-validation" novalidate>
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="firstName">First name</label>
+            <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="lastName">Last name</label>
+            <input type="text" class="form-control" id="lastName" placeholder="" value="" required>
+            
+          </div>
+        </div>
+
+        <!-- <div class="mb-3" style="height:50px;">
+          <label for="email">Email</label>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">@</span>
+            </div>
+            <input type="text" class="form-control" id="email" placeholder="email" required>
+            <div class="invalid-feedback" style="width: 100%;">
+              Your username is required.
+            </div>
+          </div>
+        </div> -->
+        <div class="mb-3" >
+          <label for="email">Quote Id <span class="text-muted"></span></label>
+          <input type="email" class="form-control" id="quote"  value="<?php echo $id; ?>" name="quoteC[quote_id]">
+        </div>
+
+        <div class="mb-3" >
+          <label for="email">Customer Id <span class="text-muted"></span></label>
+          <input type="email" class="form-control" id="customer" value="<?php echo $customer?>" name="quoteC[customer_id]">
+        </div>
+
+        <div class="mb-3" >
+          <label for="email">Email <span class="text-muted"></span></label>
+          <input type="email" class="form-control" id="email" placeholder="you@example.com" name="quoteC[email]">
+          <div class="invalid-feedback">
+            Please enter a valid email address for shipping updates.
+          </div>
+        </div>
+
+        <div class="mb-3" >
+          <label for="address">Billing Address</label>
+          <input type="text" class="form-control" id="address" placeholder="1234 Main St" name="quoteC[billing_address]">
+        </div>
+
+        <div class="mb-3">
+          <label for="city">Billing City</label>
+          <input type="text" class="form-control" id="city" placeholder="city" name="quoteC[billing_city]">
+        </div>
+
+        <div class="mb-3" >
+          <label for="region">Billing Region</label>
+          <input type="text" class="form-control" id="region" placeholder="region" name="quoteC[billing_region]">
+        </div>
+
+        <div class="mb-3">
+          <label for="country">Billing Country</label>
+          <input type="text" class="form-control" id="country" placeholder="country" name="quoteC[billing_country]">
+        </div>
+
+        <div class="mb-3">
+          <label for="phone">Billing Phone-No</label>
+          <input type="text" class="form-control" id="phone" placeholder="phone" name="quoteC[billing_phone]">
+        </div>
+
+        <div class="mb-3">
+          <label for="phone">Billing Post-code</label>
+          <input type="text" class="form-control" id="phone" placeholder="phone" name="quoteC[billing_post_code]">
+        </div>
+
+        
+<!-- 
+        <div class="row">
+          <div class="col-md-5 mb-3">
+            <label for="country">Country</label>
+            <select class="custom-select d-block w-100" id="country" required>
+              <option value="">Choose...</option>
+              <option>United States</option>
+            </select>
+            <div class="invalid-feedback">
+              Please select a valid country.
+            </div>
+          </div>
+          <div class="col-md-4 mb-3">
+            <label for="state">State</label>
+            <select class="custom-select d-block w-100" id="state" required>
+              <option value="">Choose...</option>
+              <option>California</option>
+            </select>
+            <div class="invalid-feedback">
+              Please provide a valid state.
+            </div>
+          </div>
+          <div class="col-md-3 mb-3">
+            <label for="zip">Zip</label>
+            <input type="text" class="form-control" id="zip" placeholder="" required>
+            <div class="invalid-feedback">
+              Zip code required.
+            </div>
+          </div>
+        </div>
+        <hr class="mb-4"> -->
+        
+
+        <h4 class="mb-3">shipping address</h4>
+
+        <div class="mb-3">
+          <label for="address">shipping Address</label>
+          <input type="text" class="form-control" id="address" placeholder="1234 Main St" name="quoteC[shipping_address]">
+        </div>
+
+        <div class="mb-3">
+          <label for="city">shipping City</label>
+          <input type="text" class="form-control" id="city" placeholder="city" name="quoteC[shipping_city]">
+        </div>
+
+        <div class="mb-3">
+          <label for="region">shipping Region</label>
+          <input type="text" class="form-control" id="region" placeholder="region" name="quoteC[shipping_region]">
+        </div>
+
+        <div class="mb-3">
+          <label for="country">shipping Country</label>
+          <input type="text" class="form-control" id="country" placeholder="country" name="quoteC[shipping_country]">
+        </div>
+
+        <div class="mb-3">
+          <label for="phone">shipping Phone-No</label>
+          <input type="text" class="form-control" id="phone" placeholder="phone" name="quoteC[shipping_phone]">
+        </div>
+     
+        <div class="mb-3">
+          <label for="phone">shipping Post-code</label>
+          <input type="text" class="form-control" id="phone" placeholder="phone" name="quoteC[post_code]">
+        </div>
+        
+        <hr class="mb-4">
+        <button class="btn btn-primary btn-lg btn-block" type="submit">Placeoder</button>
+      </form>
+
+      <br><br>
+    </div>
+  </div>

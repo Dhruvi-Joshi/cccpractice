@@ -3,7 +3,7 @@
 
 $bannerCollection = Mage::getModel('banner/banner')->getCollection();
  foreach($bannerCollection->getData() as $product) { 
-echo Mage::getBaseUrl().'media/banner/'.$product->getBanner_Image(); 
+//echo Mage::getBaseUrl().'media/banner/'.$product->getBanner_Image(); 
  }
     //->addFieldToFilter('total_cost',['gt'=> 5]);
     // if (count($productCollection->getData()) == 0) {

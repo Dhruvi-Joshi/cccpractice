@@ -18,7 +18,7 @@ class Sales_Model_Quote extends Core_Model_Abstract{
 
     public function initQuote(){
         $quoteId=Mage::getSingleton('core/session')->get('quote_id');
-        // print_r($quoteId);
+       // print_r($quoteId);
         $quoteId=(!$quoteId)?0:$quoteId;
         // echo $quoteId;
         $this->load($quoteId);

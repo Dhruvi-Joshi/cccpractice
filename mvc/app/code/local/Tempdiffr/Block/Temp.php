@@ -6,6 +6,11 @@ class Tempdiffr_Block_Temp extends Core_Block_Template{
 
     }
 
-
+    public function option(){
+        $option=['c'=>'celsius',
+                'f'=>'fahrenheit',
+                'k'=>'kelvin'];
+                return $option;
+    }
 }
 ?>

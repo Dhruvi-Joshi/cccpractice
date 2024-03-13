@@ -1,0 +1,54 @@
+<?php
+
+$tempCollection = Mage::getModel('tempdiffr/temp')->getCollection();
+    //->addFieldToFilter('name','ty');
+
+    // foreach ($productCollection->getData() as $product) {
+    //     var_dump($product);
+
+    //   var_dump($product->getsku());
+?>
+
+<table>
+<div class="table" style="margin-top:20px;">
+    <table border="1px solid black">
+        <tr>
+            
+            <th>username</th>
+            <th>temprature one</th>
+            <th>unit one</th>
+            <th>temprature two</th>
+            <th>unit two</th>
+            <th>opration</th>
+            <th>result</th>
+            <th>create_at</th>
+            
+            
+
+            
+        </tr>
+
+        <?php foreach($tempCollection->getData() as $product) { ?>
+
+            <tr>
+            
+            <td><?php print_r($product->getUser_Name());?></td>
+            <td><?php print_r($product->getTemprature_One());?></td>
+            <td><?php print_r($product->getUnit_One());?></td>
+            <td><?php print_r($product->getTemprature_Two());?></td>
+            <td><?php print_r($product->getUnit_Two());?></td>
+            <td><?php print_r($product->getOpration());?></td>
+            <td><?php print_r($product->getResult()); ?></td>
+            <td><?php print_r($product->getCreate_At());?></td>
+            
+
+
+           </tr>
+            <?php } ?>
+    </table>
+</div>
+
+</table>
+
+    
+
