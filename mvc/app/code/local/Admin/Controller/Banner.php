@@ -24,11 +24,11 @@ class Admin_Controller_Banner extends Core_Controller_Front_Action{
         //echo "<pre>";
         $data=$this->getRequest()->getParams('banner');
        // echo "<pre>";
-        print_r($_FILES);
+        // print_r($_FILES);
         // echo "</pre>";  
         //echo $_FILES['banner']['name']['banner_image'];
         $data['banner_image'] = $_FILES['banner']['name']['banner_image']; 
-        print_r($data);
+        // print_r($data);
         if (isset($_FILES['banner']['name']['banner_image'])) {
             //echo print_r($_FILES['banner']['name']['banner_image']);echo"<br>";echo"<br>";
             $product_image = $_FILES['banner']['name']['banner_image'];

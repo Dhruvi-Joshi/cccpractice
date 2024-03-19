@@ -1,9 +1,11 @@
 .footer{
-background:#000;
-
-
+/* background:#000; */
+background-color: lightblue;
 font-family: 'Play', sans-serif;
 text-align:center;
+
+padding-top: 200px;
+
 }
 
 .footer .row{

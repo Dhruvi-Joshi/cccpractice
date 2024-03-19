@@ -52,7 +52,7 @@ class Core_Model_Resource_Abstract{
              //echo $sql;
         } else {
             $sql = $this->insertSql($this->getTableName(), $_data);
-           // echo $sql;
+            //echo $sql;
             $id = $this->getAdapter()->insert($sql);
             $product->setId($id);
         }
@@ -85,7 +85,7 @@ class Core_Model_Resource_Abstract{
         }
         $columns = implode(",",$columns);
         $values=implode(",",$values);
-       //echo "INSERT INTO {$table} ({$columns}) VALUES ({$values});";echo"<br>";
+       echo "INSERT INTO {$table} ({$columns}) VALUES ({$values});";echo"<br>";
         return "INSERT INTO {$table} ({$columns}) VALUES ({$values});";
      }
 
@@ -120,7 +120,7 @@ class Core_Model_Resource_Abstract{
             $condit[]="`{$_field}`="."'".addslashes($_values)."'";
         }
         $condit=implode(" AND ",$condit);
-        //echo "DELETE FROM {$table} WHERE {$condit};";echo"<br>";
+        echo "DELETE FROM {$table} WHERE {$condit};";echo"<br>";
         return "DELETE FROM {$table} WHERE {$condit};";
     }
 

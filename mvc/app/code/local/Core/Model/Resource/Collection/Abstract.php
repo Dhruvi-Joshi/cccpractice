@@ -31,6 +31,7 @@ class Core_Model_Resource_Collection_Abstract{
     public function getFirstItem(){
         if (!$this->_isLoaded) {
             $this->load();
+            //echo 123333;
         }
          //echo 133;print_r($this->_data[0]);
         return $this->_data[0];

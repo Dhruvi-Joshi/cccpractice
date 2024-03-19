@@ -1,10 +1,15 @@
 <?php
 
-$id=$this->getCart();
+// $id=$this->getCart();
 $customer=$this->getCustomer();
 $quoteCollection=$this->getQuote();
 $itemCollection=$this->getproduct();
+$shipping=$this->getShippingMethod();
+$payment=$this->getPaymentMethod();
+
 //print_r($customer);
+
+
 
 // $quoteCollection = Mage::getModel('cart/cart')->getCollection()
                         // ->addFieldToFilter('quote_id',$id);
@@ -38,7 +43,7 @@ $itemCollection=$this->getproduct();
         
          <div>    
          <h6 class="my-0"><?php echo $products->getName();?></h6>
-         <img src="<?php echo Mage::getBaseUrl().'media/product/pro4.jpg';?>" style="height:80px;width:80px;">
+         <img src="<?php echo Mage::getBaseUrl().'media/product/'.$products->getImage_Link(); ?>" style="height:80px;width:80px;">
             <small class="text-muted"><span class="font-weight-bold">Price:</span><?php echo $items->getPrice();?></small>
             <small class="text-muted"><span class="font-weight-bold">Quentity:</span><?php echo $items->getQty();?></small>
           </div>
@@ -90,7 +95,7 @@ $itemCollection=$this->getproduct();
     <div class="col-md-7 order-md-2" style="padding-left:40px;">
       <h4 class="mb-3">Billing address</h4>
       <form method="POST" action="<?php echo $this->getUrl('sales/quote/save') ?>" class="needs-validation" novalidate>
-        <div class="row">
+        <!-- <div class="row">
           <div class="col-md-6 mb-3">
             <label for="firstName">First name</label>
             <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
@@ -100,7 +105,7 @@ $itemCollection=$this->getproduct();
             <input type="text" class="form-control" id="lastName" placeholder="" value="" required>
             
           </div>
-        </div>
+        </div> -->
 
         <!-- <div class="mb-3" style="height:50px;">
           <label for="email">Email</label>
@@ -114,19 +119,23 @@ $itemCollection=$this->getproduct();
             </div>
           </div>
         </div> -->
-        <div class="mb-3" >
-          <label for="email">Quote Id <span class="text-muted"></span></label>
-          <input type="email" class="form-control" id="quote"  value="<?php echo $id; ?>" name="quoteC[quote_id]">
-        </div>
 
         <div class="mb-3" >
-          <label for="email">Customer Id <span class="text-muted"></span></label>
-          <input type="email" class="form-control" id="customer" value="<?php echo $customer?>" name="quoteC[customer_id]">
+          <!-- <label for="email">Quote Id <span class="text-muted"></span></label> -->
+          <!-- <input type="hidden" class="form-control" id="quote"  value="<php echo $id; ?>" name="quoteC[quote_id]"> -->
+          <!-- <input type="hidden" class="form-control" id="quote"  value="<php echo $id; ?>" name="order[quote_id]"> -->
+
         </div>
+
+        <?php  foreach($customer->getData() as $cust)?>
+        <!-- <div class="mb-3" >
+          <label for="email">Customer Id <span class="text-muted"></span></label>
+          <input type="text" class="form-control" id="customer" value="<?php echo $cust->getCustomer_Id();?>" name="quoteC[customer_id]">
+        </div> -->
 
         <div class="mb-3" >
           <label for="email">Email <span class="text-muted"></span></label>
-          <input type="email" class="form-control" id="email" placeholder="you@example.com" name="quoteC[email]">
+          <input type="email" class="form-control" id="email" placeholder="you@example.com" value="<?php echo $cust->getCustomer_Email();?>" name="quoteC[email]">
           <div class="invalid-feedback">
             Please enter a valid email address for shipping updates.
           </div>
@@ -225,9 +234,82 @@ $itemCollection=$this->getproduct();
      
         <div class="mb-3">
           <label for="phone">shipping Post-code</label>
-          <input type="text" class="form-control" id="phone" placeholder="phone" name="quoteC[post_code]">
+          <input type="text" class="form-control" id="phone" placeholder="phone" name="quoteC[shipping_post_code]">
         </div>
         
+        <hr class="mb-4">
+        <h4 class="mb-3">Shipping Method</h4>
+        <div class="d-block my-3">
+        <?php foreach ($shipping as $key => $name) :?>
+          <div class="custom-control custom-radio">
+            <input id="<?php echo $key ?>" value="<?php echo $key ?>" name="shipping[shipping_method]" type="radio" class="custom-control-input">
+            <label class="custom-control-label" for="<?php echo $key ?>"><?php echo $name ?></label>
+          </div>
+          <?php endforeach; ?>
+          <!-- <div class="custom-control custom-radio">
+            <input id="freight" name="shippingMethod" type="radio" class="custom-control-input">
+            <label class="custom-control-label" for="freight">Freight</label>
+          </div> -->
+        </div>
+
+
+        <hr class="mb-4">
+        <h4 class="mb-3">Payment Method</h4>
+        <div class="d-block my-3">
+
+        <?php foreach ($payment as $key => $name) :?>
+          <div class="custom-control custom-radio">
+            <input id="<?php echo $key ?>" value="<?php echo $key ?>" name="payment[payment_method]" type="radio" class="custom-control-input" <?php echo ($key === 'credit') ? 'checked' : ''; ?>>
+            <label class="custom-control-label" for="<?php echo $key ?>"><?php echo $name ?></label>
+          </div>
+          <?php endforeach; ?>
+          <!-- <div class="custom-control custom-radio">
+            <input id="debit" name="paymentMethod" type="radio" class="custom-control-input" >
+            <label class="custom-control-label" for="debit">Case On</label>
+          </div>
+          <div class="custom-control custom-radio">
+            <input id="paypal" name="paymentMethod" type="radio" class="custom-control-input" >
+            <label class="custom-control-label" for="paypal">Phone call</label>
+          </div> -->
+        </div>
+
+      <div class="card-details-container" id="cardDetailsContainer">
+      <hr class="mb-4">
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="cc-name">Name on card</label>
+            <input type="text" class="form-control" id="cc-name" placeholder="" required>
+            <small class="text-muted">Full name as displayed on card</small>
+            <div class="invalid-feedback">
+              Name on card is required
+            </div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="cc-number">Credit card number</label>
+            <input type="text" class="form-control" id="cc-number" name="payment[card_number]"  required>
+            
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-3 mb-3">
+            <label for="cc-expiration">Expiration</label>
+            <input type="text" class="form-control" id="cc-expiration" placeholder="" required>
+            <div class="invalid-feedback">
+              Expiration date required
+            </div>
+          </div>
+          <div class="col-md-3 mb-3">
+            <label for="cc-cvv">CVV</label>
+            <input type="text" class="form-control" id="cc-cvv" placeholder="" required>
+            <div class="invalid-feedback">
+              Security code required
+            </div>
+          </div>
+        </div>
+        </div>
+
+
+
         <hr class="mb-4">
         <button class="btn btn-primary btn-lg btn-block" type="submit">Placeoder</button>
       </form>
@@ -235,3 +317,20 @@ $itemCollection=$this->getproduct();
       <br><br>
     </div>
   </div>
+
+  <script>
+    // Get the card details container
+    var cardDetailsContainer = document.getElementById('cardDetailsContainer');
+
+    // Listen for changes in the payment method selection
+    var paymentMethodRadios = document.querySelectorAll('input[name="payment[payment_method]"]');
+    paymentMethodRadios.forEach(function(radio) {
+        radio.addEventListener('change', function() {
+            if (this.id === 'credit') {
+                cardDetailsContainer.style.display = 'block'; // Show the card details container
+            } else {
+                cardDetailsContainer.style.display = 'none'; // Hide the card details container
+            }
+        });
+    });
+</script>

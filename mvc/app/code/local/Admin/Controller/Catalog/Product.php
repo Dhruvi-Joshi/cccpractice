@@ -30,14 +30,33 @@ class Admin_Controller_Catalog_Product extends Core_Controller_Admin_Action{
         }
         // echo "<pre>";
         $data=$this->getRequest()->getParams('data');
-        //print_r($data);
-        $productModel=Mage::getModel('catalog/product');
+        print_r($data);
+        echo "<pre>";
+        print_r($_FILES);
+        //echo "<br>";$abc= $_FILES['data']['name']['image_link'];echo $abc;echo "<br>";
+        $data['image_link'] = $_FILES['data']['name']['image_link'];
+        print_r($data);
+        if (isset($_FILES['data']['name']['image_link'])) {
+            $product_image = $_FILES['data']['name']['image_link'];
+             $product_image_tmp_name = $_FILES['data']['tmp_name']['image_link'];
+            $product_image_folder=Mage::getBaseDir('media') .'/product/'.$product_image;
+            if (move_uploaded_file($product_image_tmp_name, $product_image_folder)) {
+                echo "Image uploaded successfully!";
+            } 
+
+
+            $productModel=Mage::getModel('catalog/product');
+            $productModel->setData($data)->save();
+            print_r($productModel);
+            $this->setRedirect('admin/catalog_product/list');
+        }
+        // $productModel=Mage::getModel('catalog/product');
         //  $productModel->setData($data);
          //print_r($productModel);
-        $productModel->setData($data)->save();
+        //  $productModel->setData($data)->save();
 
-        print_r($productModel);
-        $this->setRedirect("admin/catalog_product/form?id={$productModel->getId()}");
+        // print_r($productModel);
+        // $this->setRedirect("admin/catalog_product/form?id={$productModel->getId()}");
         }
         catch(Exception $e){
             // var_dump($e->getMessage());

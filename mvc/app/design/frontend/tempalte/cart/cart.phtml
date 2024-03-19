@@ -42,13 +42,14 @@
                             <div class="card-body p-4">
 
                             <?php foreach ($itemCollection->getData() as $items) { 
+                               // echo "<pre>";print_r(get_class_methods($items));die;
                                 $productCollection = Mage::getModel('catalog/product')->getCollection()
                                 ->addFieldToFilter('product_id',$items->getProduct_id());?>
                                 
                                 <?php foreach($productCollection->getData() as $products){ ?>
                                 
                                   <div class="row align-items-center">
-                                    <div class="col-md-2"><img src="<?php echo Mage::getBaseUrl().'media/product/pro4.jpg';?>"
+                                    <div class="col-md-2"><img src="<?php echo Mage::getBaseUrl().'media/product/'.$products->getImage_Link(); ?>"
                                             class="img-fluid" alt="Generic placeholder image">
                                 
                                     </div>
@@ -71,9 +72,10 @@
                                         <div>
                                             <p class="small text-muted mb-4 pb-5">Quantity</p>
                                             <p class="lead fw-normal mb-0"><button onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
-                                                class="plus">+</button><input class="quantity fw-bold text-black" min="1" name="quantity" value="<?php echo $items->getQty(); ?>"
+                                                class="plus" style='padding-right: 0px;padding-top: 0px;padding-left: 0px;padding-bottom: 0px;'><a href="quantity?quantity=<?php echo $items->getQty()+1;?>&& item=<?php echo $items->getItem_Id();?>&& product=<?php echo $items->getProduct_Id();?>">&nbsp+&nbsp</a></button><input class="quantity fw-bold text-black" min="1" name="qty" value="<?php echo $items->getQty(); ?>"
                                                 type="number" style="width:50px;text-align:center;"><button onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
-                                                class="minus">-</button></p>
+                                                class="minus" style='padding-right: 0px;padding-top: 0px;padding-left: 0px;padding-bottom: 0px;'><a href="quantity?quantity=<?php echo $items->getQty()-1;?>&& item=<?php echo $items->getItem_Id();?>&& product=<?php echo $items->getProduct_Id();?>">&nbsp-&nbsp</a></button></p>
+                                                <!-- <br><input type='submit' value='submit'> -->
                                         </div>
                                     </div>
                                     
@@ -93,7 +95,7 @@
                                     <div class="col-md-1 d-flex justify-content-center">
                                         <div>
                                             <p class="small text-muted mb-4 pb-5">delete</p>
-                                            <a href="delete" style="color:black;"><button type="button" class="btn btn-outline-danger" name="deleteItem">Delete</button></a>
+                                            <a href="delete?id=<?php echo $items->getItem_Id();?>" style="color:black;"><button type="button" class="btn btn-outline-danger" name="deleteItem">Delete</button></a>
 
                                         </div>
                                     </div>
@@ -116,7 +118,7 @@
                                 <div class="float-end">
                                     <!-- Change the text color of the order total -->
                                     <p class="mb-0 me-5 d-flex align-items-center">
-                                        <span class="small text-muted me-2" style="color: #333;">Order total:</span> <span
+                                        <span class="small text-muted me-2" style="color: #333;">Order total :&nbsp </span> <span
                                             class="lead fw-normal" style="color: #333;"><?php echo $quotePrice->getGrand_Total(); ?></span>
                                     </p>
                                 </div>

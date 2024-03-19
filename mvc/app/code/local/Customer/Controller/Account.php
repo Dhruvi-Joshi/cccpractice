@@ -10,7 +10,12 @@ class Customer_Controller_Account extends Core_Controller_Front_Action{
 
     public function init(){
         $action= $this->getRequest()->getActionName();
+        $url=Mage::getSingleton('core/session')->get('actionUrl');
         if(in_array($action,$this->_loginRequiredActions)){
+            if($url!=null){
+                Mage::getSingleton('core/session')->remove('actionUrl');
+                $this->setRedirect($url);
+            }
             $customerId=Mage::getSingleton('core/session')->get('logged_in_customer_id');
             if(!$customerId){
                 $this->setRedirect('customer/account/login');
@@ -82,7 +87,7 @@ class Customer_Controller_Account extends Core_Controller_Front_Action{
                         'type'=>'sucess',
                         'message'=>'successful'
                     ];
-                     //$this->setRedirect('customer/account/dashboard');
+                    //  $this->setRedirect('customer/account/dashboard');
                 } else {
                     // echo "Wrong Credentials ! ";
                     $message = [

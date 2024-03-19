@@ -87,10 +87,18 @@
                 }).done(function(response){
                     var output=JSON.parse(response);
                     alert(output.type)
-                    $('#message')[0].innerHTML = output.message;
-                    alert(output.message)
-                    $( this ).addClass( "done" );
-                    $( this ).addClass( "done" );
+                    // $('#message')[0].innerHTML = output.message;
+                    // alert(output.message)
+                    // $( this ).addClass( "done" );
+                    // $( this ).addClass( "done" );
+                    if(output.type =="sucess"){
+                        alert(output.message);
+                        window.location.href="<?php echo $this->getUrl('customer/account/dashboard');?>";
+
+                    }
+                    else{
+                        alert(output.message);
+                    }
                 });
                 }
                 </script>

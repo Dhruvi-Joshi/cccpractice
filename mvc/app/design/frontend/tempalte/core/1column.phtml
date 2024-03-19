@@ -42,13 +42,13 @@
 <body>
     
      <?php echo $this->getRequest()->getParams("pid");?> 
-    <div class="header"><?php echo $this->getChildHtml('header')?></div>
+    <div class="header" style="padding-bottom:20px;"><?php echo $this->getChildHtml('header')?></div>
     <div class="content">
         <div class="left"></div> 
         <div class="content"><?php echo $this->getChildHtml('content')?></div>
          <div class="right"></div>
     </div>
-    <div class="footer"><?php echo $this->getChildHtml('footer')?></div>
+    <div class="footer" style="padding-top: 200px;"><?php echo $this->getChildHtml('footer')?></div>
 
     
 </body>

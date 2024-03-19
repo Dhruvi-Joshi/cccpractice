@@ -1,3 +1,5 @@
+
+<br><br>
 <?php
 
 $error = "";
@@ -14,26 +16,94 @@ $productCollection = Mage::getModel('catalog/product')->getCollection()
      ->addFieldToFilter('product_id',$no);
    
 ?>
-<div class="product-details">
-    <?php foreach ($productCollection->getData() as $product) { ?>
-        <div class="product-item">
-            <div><strong>Name:</strong> <?php echo $product->getname(); ?></div>
-            <div><strong>Description:</strong> <?php echo $product->getdescription(); ?></div>
-            <div><strong>Image Link:</strong> <?php echo $product->getimage_link(); ?></div>
-            <div><strong>Image:</strong> <img src="<?php echo $product->getimage_link(); ?>" alt="Product Image" style="max-width: 100px; max-height: 100px;"></div>
-            <div><strong>Price:</strong> <?php echo $product->getprice(); ?></div>
-            <div><strong>Color:</strong> <?php echo $product->getcolor(); ?></div>
-            <div><strong>Size:</strong> <?php echo $product->getsize(); ?></div>
-            <div><strong>Total Cost:</strong> <?php echo $product->gettotal_cost(); ?></div>
+<div class="row m-0">
+<?php foreach ($productCollection->getData() as $product) { ?>
+            <div class="col-lg-4 left-side-product-box pb-3">
+                <img src="<?php echo Mage::getBaseUrl().'media/product/'.$product->getImage_Link(); ?>" class="border p-3">
+                
+            </div>
+            <div class="col-lg-8">
+                <div class="right-side-pro-detail border p-3 m-0">
+                    <div class="row">
+                        <!-- <div class="col-lg-12">
+                            <-- <span>Who What Wear</span> 
+                            <p class="m-0 p-0"><php echo $product->getprice(); ?></p>
+                        </div> -->
+                        <div class="col-lg-12">
+                             <!-- <span>Product Name</span> -->
+                            <p class="m-0 p-0 price-pro"><?php echo $product->getname(); ?></p><br>
+                            <hr class="p-0 m-0">
+                        </div>
+                        <div class="col-lg-12 pt-2">
+                            <strong>Product Detail: </strong><span><br><br>
+                            <strong>SKU : </strong><span><?php echo $product->getSku(); ?></span><br>
+                            <strong>Name : </strong><span><?php echo $product->getName(); ?></span><br>
+                            <strong>Color : </strong><span><?php echo $product->getColor(); ?></span><br>
+                            <strong>Size : </strong><span><?php echo $product->getSize(); ?></span><br>
+                            <strong>Description : </strong><span><?php echo $product->getdescription(); ?></span><br>
+                            <strong>Link : </strong><span><?php echo $product->getLink(); ?></span><br>
+                            <strong>Price : </strong><span><?php echo $product->getPrice(); ?></span><br>
+                            <strong>mfr cost : </strong><span><?php echo $product->getMfr_Cost(); ?></span><br>
+                            <strong>Shipping Cost : </strong><span><?php echo $product->getshipping_cost(); ?></span><br>
+                            <strong>Total Cost : </strong><span><?php echo $product->gettotal_cost(); ?></span><br>
 
-            <form action="<?php echo $this->getUrl("sales/quote/add") ?>" method="post">
+                        
+                            <hr class="m-0 pt-2 mt-2">
+                        </div>
+                        <div class="col-lg-12">
+                            <p class="tag-section">
+                                <strong>Catagory  : </strong><a href=""><?php echo $product->getCategory_Id(); ?></a></p>
+                        </div>
+                        
+                        <div class="col-lg-12">
+                        <form action="<?php echo $this->getUrl("sales/quote/add") ?>" method="post">
+                       
+                            <h6>Quantity :</h6>
+                            <input type="number" class="form-control text-center w-100" value="1" name="cart[qty]" min="1">
+                            <input type="hidden" class="form-control text-center w-100" name="cart[product_id]" value="<?php echo $product->getproduct_id(); ?>">
+                        </div>
+                        <div class="col-lg-12 mt-3">
+                            <div class="row">
+                                <div class="col-lg-6 pb-2">
+                                   
+                                    <input type="submit" class="btn btn-danger w-100" value="Add To Cart">
+                                </div>
+                                <div class="col-lg-6">
+                                    <a href="#" class="btn btn-success w-100">Shop Now</a>
+                                </div>
+                            </div>
+                        </div>
+                </form>
+                    </div>
+                </div>
+            </div>
+            <?php  } ?>
+</div>
+      
+        
+
+<!-- 
+
+<div class="product-details">
+    <php foreach ($productCollection->getData() as $product) { ?>
+        <div class="product-item">
+            <div><strong>Name:</strong> <php echo $product->getname(); ?></div>
+            <div><strong>Description:</strong> <php echo $product->getdescription(); ?></div>
+            <div><strong>Image Link:</strong> <php echo $product->getimage_link(); ?></div>
+            <div><strong>Image:</strong> <img src="<php echo $product->getimage_link(); ?>" alt="Product Image" style="max-width: 100px; max-height: 100px;"></div>
+            <div><strong>Price:</strong> <php echo $product->getprice(); ?></div>
+            <div><strong>Color:</strong> <php echo $product->getcolor(); ?></div>
+            <div><strong>Size:</strong> <php echo $product->getsize(); ?></div>
+            <div><strong>Total Cost:</strong> <php echo $product->gettotal_cost(); ?></div>
+
+            <form action="<php echo $this->getUrl("sales/quote/add") ?>" method="post">
                 <label for="quantity">Quantity:</label>
                 <input type="number" id="quantity" name="cart[qty]" value="1" min="1">
-                <input type="text" name="cart[product_id]" value="<?php echo $product->getproduct_id(); ?>">
+                <input type="text" name="cart[product_id]" value="<php echo $product->getproduct_id(); ?>">
 
               
                 <button type="submit">Add to Cart</button>
             </form>
         </div>
-    <?php } ?>
-</div>
+    <php } ?>
+</div> -->

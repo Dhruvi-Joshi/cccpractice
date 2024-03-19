@@ -48,35 +48,35 @@ $product_model = $this->getProduct();
 </style>
 <body>
     <!-- <form method="POST" action="<php echo $this->getUrl("catalog/product/save") ?>"> -->
-    <form method="POST" action="<?php echo $this->getUrl("admin/catalog_product/save") ?>">
+    <form method="POST" enctype="multipart/form-data" action="<?php echo $this->getUrl("admin/catalog_product/save") ?>">
     <!-- <php print_r($this) ?> -->
     <h1 style= "color:blue; font-size:200%;">Product Form</h1>
 
     <label>Product Id:</label>
-                <input type="text" name="data[product_id]" value="<?php echo $product_model->getid()?>"><br><br>
+                <input type="text" name="data[product_id]" value="<?php echo $product_model->getId()?>"><br><br>
        
        
                 
     <label>SKU:</label>
-                <input type="text" name="data[sku]" value="<?php echo $product_model->getsku()?>"><br><br>
+                <input type="text" name="data[sku]" value="<?php echo $product_model->getSku()?>"><br><br>
         
     <label>Product Name:</label>
-                <input type="text" name="data[name]" placeholder="Enter product name" value="<?php echo $product_model->getname()?>"required><br><br>
+                <input type="text" name="data[name]" placeholder="Enter product name" value="<?php echo $product_model->getName()?>"required><br><br>
                 
     <label>Color:</label>
-                <input type="text" name="data[color]" placeholder="Enter color" value="<?php echo $product_model->getcolor()?>"><br><br>
+                <input type="text" name="data[color]" placeholder="Enter color" value="<?php echo $product_model->getColor()?>"><br><br>
 
     <label>size:</label>
-                <input type="text" name="data[size]" placeholder="size" value="<?php echo $product_model->getsize()?>"><br><br>
+                <input type="text" name="data[size]" placeholder="size" value="<?php echo $product_model->getSize()?>"><br><br>
         
     <label>description:</label>
-                <input type="textarea" name="data[description]" placeholder="description" value="<?php echo $product_model->getdescription()?>"><br><br>
+                <input type="textarea" name="data[description]" placeholder="description" value="<?php echo $product_model->getDescription()?>"><br><br>
         
     <label>image link:</label>
-                <input type="text" name="data[image_link]" placeholder="image link" value="<?php echo $product_model->getimage_link()?>"><br><br>
+                <input type="file" name="data[image_link]" value="<?php echo $product_model->getImage_Link()?>"/><br><br>
            
     <label>link:</label>
-                <input type="text" name="data[link]" placeholder="link" value="<?php echo $product_model->getlink()?>"><br><br>
+                <input type="text" name="data[link]" placeholder="link" value="<?php echo $product_model->getLink()?>"><br><br>
                
     <label>Category:</label>
                 <select name="data[Category_id]">

@@ -29,12 +29,29 @@ class Sales_Block_Checkout extends Core_Block_Template{
     public function getCustomer(){
         $customerModel=Mage::getModel('customer/customer')->load(Mage::getSingleton("core/session")->get("logged_in_customer_id"));
         $cid=$customerModel->getcustomer_id();
-        return $cid;
+        $cust =Mage::getModel('customer/customer')->getCollection()
+                    ->addFieldToFilter('customer_id',$cid);
+        return $cust;
+     } 
+
+
+     public function getPaymentMethod(){
+        $payment=Mage::getModel('payment/payment')->option();
+        // print_r($payment);
+        return $payment;
+     }
+
+     public function getShippingMethod(){
+        $shipping=Mage::getModel('shipping/shipping')->option();
+        // print_r($shipping);
+        return $shipping;
+     }
+        
      }
 
 
    
     
-}
+
 
 ?>
