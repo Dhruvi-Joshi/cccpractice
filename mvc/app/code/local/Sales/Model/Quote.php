@@ -92,6 +92,8 @@ class Sales_Model_Quote extends Core_Model_Abstract{
         return $shipId;
     }
 
+    
+
     public function addPayment($payment)
     {
         $this->initQuote();
@@ -113,9 +115,11 @@ class Sales_Model_Quote extends Core_Model_Abstract{
                 ->save();
         }
 
-        return $payId;
+        //return $payId;
         
     }
+
+    
 
     public function convert()
     {
@@ -129,12 +133,12 @@ class Sales_Model_Quote extends Core_Model_Abstract{
             $item = $this->convertItemCollection($orderId);
 
             $payment = $this->convertPayment($orderId);
-            $order_payment=Mage::getSingleton('sales/quote')->addShipId($payment->getId());
-            echo $order_payment;
+            $order_payment=$payment->getId();
+           echo $order_payment;
 
 
             $shipping = $this->convertShipping($orderId);
-            $order_shipping=Mage::getSingleton('sales/quote')->addPayId($shipping->getId());
+            $order_shipping=$shipping->getId();
             echo $order_shipping;
             $order->addData('payment_id',$order_payment)->save();
             $order->addData('shipping_id',$order_shipping)->save();

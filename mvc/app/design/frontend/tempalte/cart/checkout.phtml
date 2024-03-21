@@ -242,7 +242,7 @@ $payment=$this->getPaymentMethod();
         <div class="d-block my-3">
         <?php foreach ($shipping as $key => $name) :?>
           <div class="custom-control custom-radio">
-            <input id="<?php echo $key ?>" value="<?php echo $key ?>" name="shipping[shipping_method]" type="radio" class="custom-control-input">
+            <input id="<?php echo $key ?>" value="<?php echo $key ?>" name="shipping[shipping_method]" type="radio" class="custom-control-input" checked>
             <label class="custom-control-label" for="<?php echo $key ?>"><?php echo $name ?></label>
           </div>
           <?php endforeach; ?>

@@ -56,6 +56,21 @@ class Core_Model_Resource_Collection_Abstract{
         return $this;
     }
 
+    public function orderBy()
+    {
+        $orderByCondition = [];
+        foreach ($this->_select['orderBy'] as $_value) {
+           
+            foreach ($_value as $_k => $_v) {
+                $orderByCondition[] = $_k . " " . $_v;
+            }
+        }
+        $orderByCondition = implode(" ", $orderByCondition);
+        return $orderByCondition;
+
+
+    }
+
 
     public function load()
         {
@@ -99,6 +114,12 @@ class Core_Model_Resource_Collection_Abstract{
                 $sql .= " GROUP BY " . implode(', ', $this->_select['group']);
             }
             //echo $sql;echo"<br>";
+
+            if (isset($this->_select['orderBy']) && count($this->_select['orderBy'])) {
+                $sql .= "ORDER BY {$this->orderBy()}";
+
+            }
+            echo $sql;echo"<br>";
             $result = $this->_resource->getAdapter()->fetchAll($sql);
             //print_r($result);
             foreach($result as $row) {
@@ -107,6 +128,15 @@ class Core_Model_Resource_Collection_Abstract{
             $this->_isLoaded = true;
             return $this;
         }
+
+        public function addFieldToOrderBy($filter)
+        {
+            $this->_select['orderBy'][] = $filter;
+            // echo "<pre>";print_r($this);
+            return $this;
+        }
+
+        
 
     
 }

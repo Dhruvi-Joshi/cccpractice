@@ -13,8 +13,9 @@ class sales_Controller_Quote extends Core_Controller_Front_Action{
         //echo $action;
         if(in_array($action,$this->_loginRequiredActions)){
             $customerId=Mage::getSingleton('core/session')->get('logged_in_customer_id');
-            $actionUrl=$this->getRequest()->getRequestUri();
-            echo $actionUrl;
+            $actionUrl = ltrim($this->getRequest()->getRequestUri(), '/');
+            // $actionUrl=$this->getRequest()->getRequestUri();
+            //echo $actionUrl;
             if(!$customerId){
                 Mage::getSingleton('core/session')->set('actionUrl',$actionUrl);
                 $this->setRedirect('customer/account/login');

@@ -1,59 +1,130 @@
 <?php
+$order=$this->orderDetails();
+$customer=$this->customerDetails();
+$items=$this->itemsDetails();
+$menu=$this->MenuDetails();
+$select=$this->menuSelect();
 
 
-$bannerCollection = Mage::getModel('banner/banner')->getCollection();
- foreach($bannerCollection->getData() as $product) { 
-//echo Mage::getBaseUrl().'media/banner/'.$product->getBanner_Image(); 
- }
-    //->addFieldToFilter('total_cost',['gt'=> 5]);
-    // if (count($productCollection->getData()) == 0) {
-    //     $error = "not data found";
-    // }
 
+// print_r($select);
+  
     
+// $items=$this->productDetails(35);
+// echo $items->getName();
 
-    // foreach ($productCollection->getData() as $product) {
-    //     var_dump($product);
 
-    //   var_dump($product->getsku());
+// foreach ($customer as $itemm) {
+//     print_r($itemm->getCustomer_id());
+// }echo "<br>";
+
+// foreach ($items as $itemmm) {
+//     print_r($itemmm->getProduct_Id()); 
+//     print_r($itemmm->getPrice());
+//     print_r($itemmm->getQty());
+//     print_r($itemmm->getRow_Total());
+
+// }echo "<br>";
 ?>
+<div class="container mt-5">
+   
+    <table class="table table-borderless main">
+        <thead>
+            <tr class="head">
+                <th scope="col">Order ID</th>
+                <th scope="col">Order No</th>
+                <th scope="col">Customer Id</th>
+                <th scope="col">Product Name</th>
+                <th scope="col">Image</th>
+                <th scope="col">Price</th>
+                <th scope="col">Qty</th>
+                <th scope="col">Total</th>
+                <th scope="col">Status</th>
+                <th scope="col">Action</th>
+                <th scope="col">View</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($order as $index => $item): 
+                //echo "<pre>";print_r($order);?>
+               
+                <form method="POST" action="<?php echo $this->getUrl("admin/sales/save") ?>">
+            <tr class="rounded bg-white">
+                <td class="order-color"><?php echo $item->getOrder_id(); ?></td>
+                <td><?php echo $item->getOrder_no(); ?>
+            </td>
+                <?php if(isset($customer[$index])): ?>
+                <td class="d-flex align-items-center">
+                    <img src="https://i.imgur.com/C4egmYM.jpg" class="rounded-circle" width="25">
+                    <span class="ml-2"><?php echo $customer[$index]->getCustomer_id(); ?></span>
+                </td>
+                <?php else: ?>
+                <td></td>
+                <?php endif; ?>
+                <?php if(isset($items[$index])): 
+                    $productId = $items[$index]->getProduct_Id(); 
+                    // echo $productId;
+                    $productDetails = $this->productDetails($productId);
+                    ?>
+                <td><?php echo $productDetails->getName(); ?></td>
+                <td><img src="<?php echo Mage::getBaseUrl().'media/product/'.$productDetails->getImage_Link(); ?>"
+                                            class="img-fluid" alt="Generic placeholder image">
+                </td>
 
-<table>
-<div class="table" style="margin-top:20px;">
-    <table border="1px solid black">
-        <tr>
-            <th>Order Id</th>
-            <th>Customer Id</th>
-            <th>Product Id</th>
-            <th>Image</th>
-            <th>Qty</th>
-            <th>Status</th>
-           
-            
+                <td><?php echo $items[$index]->getPrice(); ?></td>
+                <td><?php echo $items[$index]->getQty(); ?></td>
+                <td><?php echo $items[$index]->getRow_Total(); ?></td>
+                <?php else: ?>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <?php endif; ?>
+                <td>
+                <!-- <div class="dropdown">
+            <input type="hidden" name="status[order_id]" value="<php echo $item->getOrder_id(); ?>">
+                        <select name="status[to_status]" id="status">
+                            <option value="pandding">pandding</option>
+                            <option value="shipping">shipping</option>
+                            <option value="shipped">shipped</option>
+                            <option value="Arrived">Arrived</option>
+                            <option value="Collected">Collected</option>
 
-            
-            <th>Edit</th>
-            
-        </tr>
-        <tr style="text-align: center;"><tr>
-            <!-- <td colspan="17"><php echo $error ?></td></tr> -->
-        <?php foreach($bannerCollection->getData() as $product) { ?>
+                        </select>    
+                </div>  -->
+               
+                    
+                <input type="hidden" name="status[order_id]" value="<?php echo $item->getOrder_id(); ?>">
+                
+                       
+                <select name="status[to_status]" id="status">
+                    <?php foreach ($menu as $key => $name) :?>
+                        
+                        <option value="<?php echo $key ?>" ><?php echo $name ?></option>
+                       
+                    <?php endforeach; ?>
+                </select>
 
-            
-        <tr>
-        <td><?php print_r($product->getBanner_Id());?></td>
-        <td><?php print_r($product->getTitle());?></td>
-         <td>
-        <img src="<?php echo Mage::getBaseUrl().'media/banner/'.$product->getBanner_Image(); ?>" alt="Banner Image" style="width: 50px; height: auto;"></td>
-        <td><?php print_r($product->getStatus());?></td>
-        <td><?php print_r($product->getShow_On());?></td>
-        
+                </td>
 
-        <td><button class="edit-button"><a href='<?php echo $this->getUrl('admin/banner/form')?>?id=<?php echo $product->getBanner_Id()?>'>Edit</a></button></td>
-        </tr>
-        <?php } ?>
+                <!-- <td>
+                    <div class="dropdown">
+                        <button class="btn btn-primary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
+                            Authorized
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <li><a class="dropdown-item" href="#">Yes</a></li>
+                            <li><a class="dropdown-item" href="#">No</a></li>
+                        </ul>
+                    </div>
+                </td> -->
+                <td>
+            <input type="submit"  class="btn btn-outline-danger" name="submit" value="Update Status"></td>
+                <td><a href="<?php echo $this->getUrl('admin/sales/view')?>?id=<?php echo $item->getOrder_id(); ?>" style="color:black;"><button type="button" class="btn btn-primary">View</button></a></td>
+                
+                </form><?php endforeach; ?>
+            </tr>
+            
+        </tbody>
     </table>
 </div>
-
-
-
