@@ -159,9 +159,12 @@ class Sales_Model_Quote extends Core_Model_Abstract{
         //     ->save();
 
         //     print_r($a);die;
-        echo $this->order_payment();
+        $defultStatus=Status_Model_Status::DEFAULT_ORDER_STATUS_TEXT;
+        echo $defultStatus;
+        //echo $this->order_payment();
         return Mage::getModel('sales/order')
-            ->setData($this->getData())   
+            ->setData($this->getData())  
+            ->addData('status',$defultStatus) 
             ->removeData('quote_id')
             ->removeData('order_id')
             ->removeData('payment_id')

@@ -82,7 +82,7 @@ class sales_Controller_Quote extends Core_Controller_Front_Action{
     }
 
     public function saveAction(){
-        echo "<pre>";
+        // echo "<pre>";
         // $customerId=Mage::getSingleton('core/session')->get('logged_in_customer_id');
         // echo $customerId;
         $addressData=$this->getRequest()->getParams('quoteC');

@@ -22,7 +22,6 @@ class Sales_Block_Admin_List extends Core_Block_Template{
     public function productDetails($productId){
         return Mage::getModel('catalog/product')
         ->load($productId);
-    
     }
 
     public function MenuDetails(){

@@ -23,7 +23,7 @@ class Admin_Controller_Sales extends Core_Controller_Front_Action{
         $historyModel = Mage::getModel('Sales/Order_Status_History'); 
         
         $historyModel->setData($data)->save();
-        
+        echo $historyModel->getTo_Status();
        
         $order=Mage::getModel('sales/order')->addData('order_id',$historyModel->getOrder_Id())
              ->addData('status',$historyModel->getTo_Status())->save();
@@ -38,9 +38,8 @@ class Admin_Controller_Sales extends Core_Controller_Front_Action{
         
         
         $child= $layout->getChild("content");
-        // $abc=$layout->createBlock("catalog/admin_product_form");
-        // echo $abc;
-        $list=$layout->createBlock("sales/admin_list");//->setTemplate("banner/admin/form.phtml");
+   
+        $list=$layout->createBlock("sales/admin_view");
         $child->addChild("list",$list);
         
 

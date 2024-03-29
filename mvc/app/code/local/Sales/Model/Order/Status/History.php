@@ -12,6 +12,7 @@ class Sales_Model_Order_Status_History extends Core_Model_Abstract{
         $orderData=$this->getItemCollection();
         //echo "<pre>";print_r($orderData);
         $defultStatus=Status_Model_Status::DEFAULT_ORDER_STATUS;
+        $defultText=Status_Model_Status::DEFAULT_ORDER_STATUS_TEXT;
         //$data=Mage::getModel('Sales/Order_Status_History')->getItemCollection();
         /* foreach($this->getItemCollection()->getData() as $_item){
             echo $_item->getTo_Status();
@@ -22,8 +23,8 @@ class Sales_Model_Order_Status_History extends Core_Model_Abstract{
         $this->addData('from_status',$to_status);
         }
         else{
-            $defult='placeOrder';
-            $this->addData('from_status',$defult);
+           // $defult='placeOrder';
+            $this->addData('from_status',$defultText);
         }
         $this->addData('action_by',$defultStatus);
         

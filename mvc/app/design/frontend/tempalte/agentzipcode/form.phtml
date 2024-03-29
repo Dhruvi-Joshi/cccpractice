@@ -1,0 +1,81 @@
+<?php
+
+// echo"<pre>";
+
+// echo get_class($this);
+$zipcode=$this->zipData();
+// echo get_class($zipcode);
+// print_r($zipcode);
+
+$city=$this->cityData();
+// ->getData();
+// print_r($city);
+// $selectcity=$this->selectCity();
+?>
+
+<html>
+<head>
+    <title>Agent</title>
+</head>
+<style>
+    
+     form {
+            width: 50%;
+            text-align: center;
+           
+        }
+
+    
+        label {
+            color:blue;
+            display: inline-block;
+            width: 150px;
+            margin-right: 10px;
+            text-align: left;
+        }
+        input, select {
+            width: 200px;
+        }
+        #but{
+            width: 15px;
+            margin-left: 35px;
+            
+        }
+
+
+
+</style>
+<body>
+<form method="POST" action="<?php echo $this->getUrl("agentzipcode/agent/show") ?>">
+ 
+    <h1 style= "color:blue; font-size:200%;">Agent form</h1>
+
+                
+    <label>Select City:</label>
+                 <select name="agent[city]" id="status">
+                    <?php foreach ($city->getData() as $city) :?> 
+                        <option value="<?php echo $city->getAgent_id(); ?>"><?php echo $city->getName(); ?></option>
+                    <?php endforeach; ?>
+                </select><br><br>
+
+    <input type="submit" name="submit" value="submit"style="color:blue; font-size:150%;border-radius:80px;">
+<br><br>
+    <label>Select Zipcode:</label>
+                <select name="status" id="status">
+                    <?php foreach ($zipcode->getData() as $zip) : ?>
+                        <option value="<?php echo $zip->getName(); ?>"><?php echo $zip->getName(); ?></option>
+                    <?php endforeach; ?>
+                </select><br><br>
+            
+               
+         
+        
+    <!-- <input type="submit" name="submit" value="submit"style="color:blue; font-size:150%;border-radius:80px;"> -->
+             
+
+             
+
+                
+    </form>
+</body>
+</html> 

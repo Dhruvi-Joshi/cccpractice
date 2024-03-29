@@ -1,0 +1,5 @@
+<?php
+class Agentzipcode_Model_Resource_Collection_Agent extends Core_Model_Resource_Collection_Abstract{
+    
+}
+?>

@@ -119,7 +119,7 @@ class Core_Model_Resource_Collection_Abstract{
                 $sql .= "ORDER BY {$this->orderBy()}";
 
             }
-            echo $sql;echo"<br>";
+            //echo $sql;echo"<br>";
             $result = $this->_resource->getAdapter()->fetchAll($sql);
             //print_r($result);
             foreach($result as $row) {

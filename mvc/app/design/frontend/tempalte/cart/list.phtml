@@ -81,17 +81,7 @@ $select=$this->menuSelect();
                 <td></td>
                 <?php endif; ?>
                 <td>
-                <!-- <div class="dropdown">
-            <input type="hidden" name="status[order_id]" value="<php echo $item->getOrder_id(); ?>">
-                        <select name="status[to_status]" id="status">
-                            <option value="pandding">pandding</option>
-                            <option value="shipping">shipping</option>
-                            <option value="shipped">shipped</option>
-                            <option value="Arrived">Arrived</option>
-                            <option value="Collected">Collected</option>
-
-                        </select>    
-                </div>  -->
+                
                
                     
                 <input type="hidden" name="status[order_id]" value="<?php echo $item->getOrder_id(); ?>">
@@ -100,7 +90,7 @@ $select=$this->menuSelect();
                 <select name="status[to_status]" id="status">
                     <?php foreach ($menu as $key => $name) :?>
                         
-                        <option value="<?php echo $key ?>" ><?php echo $name ?></option>
+                        <option value="<?php echo $key ?>"><?php echo $name ?></option>
                        
                     <?php endforeach; ?>
                 </select>
