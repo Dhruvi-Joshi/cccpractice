@@ -27,7 +27,7 @@ class Admin_Controller_Sales extends Core_Controller_Front_Action{
        
         $order=Mage::getModel('sales/order')->addData('order_id',$historyModel->getOrder_Id())
              ->addData('status',$historyModel->getTo_Status())->save();
-        //$this->setRedirect("admin/sales/list");
+        $this->setRedirect("admin/sales/list");
         
     }
 

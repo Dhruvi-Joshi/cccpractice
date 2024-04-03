@@ -3,7 +3,7 @@
 class Admin_Controller_Banner extends Core_Controller_Front_Action{
 
     public function formAction(){
-         echo 123;
+       
         $layout=$this->getLayout();
         $layout->getChild("head")->addCss('../../skin/css/header.css');
         $layout->getChild("head")->addCss('../../skin/css/footer.css');

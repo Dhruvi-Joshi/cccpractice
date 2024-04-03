@@ -143,6 +143,9 @@ class Sales_Model_Quote extends Core_Model_Abstract{
             $order->addData('payment_id',$order_payment)->save();
             $order->addData('shipping_id',$order_shipping)->save();
             $this->addData('order_id', $order->getId())->save();
+            //remove session
+            Mage::getSingleton('core/session')->remove('quote_id');
+
         }
     }
 

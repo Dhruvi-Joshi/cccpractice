@@ -1,84 +1,128 @@
-<!-- <h1>header.phtml</h1> -->
-<!-- <php echo get_class($this); ?> -->
-<!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <!-- Container wrapper -->
-    <div class="container-fluid">
-        <!-- Navbar brand -->
-        <a class="navbar-brand mt-2 mt-lg-0" href="#">
-            <h5 class="pt-1">MDB</h5>
+<?php
+ $categoryData=Mage::getModel('category/category')->getCollection()
+                ->addFieldToFilter('status',1);
+ ?>
+ <style>
+       .navbar-nav .nav-link {
+      color: white; /* Set link color to white */
+    }
+    /* Sidebar styling */
+    .sidebar {
+      background-color: #007bff; 
+      /* Light white color */
+      /* padding: 20px; */
+    }
+    .sidebar .nav-link {
+      display: inline-block;
+      margin-bottom: 10px;
+    }
+    .sidebar .nav-link:hover {
+      color: white; /* Change link color on hover */
+    }
+
+    #profileOptions {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            /* background-color: #fff; 
+            color:black;*/
+            border: 1px solid #ccc;
+            padding: 10px;
+            display: none;
+        }
+
+        #profileOptions .nav-item {
+            margin-bottom: 5px;
+        }
+  </style>
+    
+    
+  </style>
+</head>
+<body>
+
+<nav class="bg-primary">
+  <header class="header">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container">
+        <!-- Logo -->
+        <a class="navbar-brand" href="#">
+        <a  href="#">furniture</a>
+          <!-- <img src="logo.png" alt="furniture" height="40"> -->
         </a>
-        <!-- Toggle button -->
-        <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <i class="fas fa-bars"></i>
-        </button>
 
-        <!-- Collapsible wrapper -->
+        <!-- Links -->
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <!-- Left links -->
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Dashboard</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Team</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Projects</a>
-                </li>
-            </ul>
-            <!-- Left links -->
+          <ul class="navbar-nav mr-auto">
+            <!-- <li class="nav-item active">
+              <a class="nav-link" href="#">Home</a>
+            </li> -->
+            <li class="nav-item active">
+              <a class="nav-link" href="<?php echo $this->getUrl('customer/account/dashboard') ?>">Profile</a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="<?php echo $this->getUrl('sales/quote/cart') ?>">cart</a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="<?php echo $this->getUrl('customer/account/history') ?>">My Order</a>
+            </li>
+          </ul>
 
-            <!-- Right elements 
-            <div class="d-flex align-items-center justify-content-start">
-                 Icon 
-                <a class="text-reset me-3" href="#">
-                    <i class="fas fa-shopping-cart text-white"></i>
-                  
-                </a>
-
-                 Notifications 
-                <div class="dropdown">
-                    <a class="text-reset me-3 dropdown-toggle hidden-arrow" href="#" id="navbarDropdownMenuLink" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
-                        <i class="fas fa-bell text-white"></i>
-                        <span class="badge rounded-pill badge-notification bg-danger">1</span>
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
-                        <li>
-                            <a class="dropdown-item" href="#">Some news</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="#">Another news</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="#">Something else here</a>
+            <!-- Profile Menu -->
+            <?php $customerId=Mage::getSingleton('core/session')->get('logged_in_customer_id');
+            if(!$customerId){ ?>
+                <ul class="navbar-nav ml-auto">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Profile
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="<?php echo $this->getUrl('customer/account/login') ?>">Login</a>
+                                <a class="dropdown-item" href="<?php echo $this->getUrl('customer/account/register') ?>">Register</a>
+                            </div>
                         </li>
                     </ul>
-                </div>
-                 Avatar 
-                <div class="dropdown">
-                    <a class="dropdown-toggle d-flex align-items-center hidden-arrow" href="#" id="navbarDropdownMenuAvatar" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
-                        <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" class="rounded-circle" height="25" alt="Black and White Portrait of a Man" loading="lazy" />
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
-                        <li>
-                            <a class="dropdown-item" href="#">My profile</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="#">Settings</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="#">Logout</a>
+
+                <?php } 
+                else {?>
+
+                      <ul class="navbar-nav ml-auto">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Profile
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="<?php echo $this->getUrl('customer/account/login') ?>">Logout</a>
+                               
+                            </div>
                         </li>
                     </ul>
-                </div>
-            </div>
-             Right elements -->
+
+                <?php } ?>
+            
+           
+      </div>
+    </nav>
+
+  
+  </header>
+  
+
+  <!-- Sidebar -->
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <div class="sidebar">
+        <a class="nav-link" href="<?php echo $this->getUrl('page/index/index')?>" style="color:black;">Home</a>
+        <?php foreach($categoryData->getData() as $link) { ?>
+          <a class="nav-link" href="<?php echo $this->getUrl('catalog/category/view') ?>?id=<?php echo $link->getCategory_Id() ?>" style="color:black;"><?php echo $link->getCategory_name()?></a>
+          <?php } ?>
+         
+          <!-- Add more sidebar links as needed -->
         </div>
-        <!-- Collapsible wrapper -->
+      </div>
     </div>
-    <!-- Container wrapper -->
+  </div>
 </nav>
-<!-- Navbar -->
 
-<!-- <div style="height: 300px;"></div> -->
+<!-- Include jQuery and Bootstrap JS -->

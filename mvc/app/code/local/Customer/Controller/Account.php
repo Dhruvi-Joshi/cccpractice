@@ -34,7 +34,7 @@ class Customer_Controller_Account extends Core_Controller_Front_Action{
         $layout->getChild("head")->addCss('../../skin/css/footer.css');
         
         $child= $layout->getChild("content");
-        $form=$layout->createBlock("core/template")->setTemplate("customer/form.phtml");
+        $form=$layout->createBlock("customer/form");
         $child->addChild("form",$form);
 
         $layout->toHtml();
@@ -43,6 +43,7 @@ class Customer_Controller_Account extends Core_Controller_Front_Action{
     public function loginAction()
     {
         if (!$this->getRequest()->isPost()) {
+        $this->getLayout()->setTemplate('core/login.phtml');
         $layout=$this->getLayout();
         $layout->getChild("head")->addCss('../../skin/css/header.css');
         $layout->getChild("head")->addCss('../../skin/css/footer.css');
@@ -145,6 +146,54 @@ class Customer_Controller_Account extends Core_Controller_Front_Action{
          //print_r($productModel);
         $productModel->setData($data)->save();
         print_r($productModel);
+    }
+
+    public function orderAction(){
+        $layout=$this->getLayout();
+        $layout->getChild("head")->addJs('js/page.js');
+        $layout->getChild("head")->addJs('js/head.js');
+        $layout->getChild("head")->addCss('css/page.css');
+        $layout->getChild("head")->addCss('css/head.css');
+        $layout->getChild("head")->addCss('../../skin/css/header.css');
+        $layout->getChild("head")->addCss('../../skin/css/footer.css');
+        
+        
+        $child= $layout->getChild("content");
+        $form=$layout->createBlock("customer/order");
+        $child->addChild("form",$form);
+
+        $layout->toHtml();
+    }
+
+    public function historyAction(){
+        $layout=$this->getLayout();
+        $layout->getChild("head")->addJs('js/page.js');
+        $layout->getChild("head")->addJs('js/head.js');
+        $layout->getChild("head")->addCss('css/page.css');
+        $layout->getChild("head")->addCss('css/head.css');
+        $layout->getChild("head")->addCss('../../skin/css/header.css');
+        $layout->getChild("head")->addCss('../../skin/css/footer.css');
+        
+        
+        $child= $layout->getChild("content");
+        $form=$layout->createBlock("customer/history");
+        $child->addChild("form",$form);
+
+        $layout->toHtml();
+    }
+
+    public function cancelAction(){
+        $id =  $_GET['id'];
+        // echo $id;
+        $data=['to_status'=>'cancel_request','order_id'=>$id];
+        $historyModel = Mage::getModel('Sales/Order_Status_History'); 
+        
+        $historyModel->setData($data)->save();
+        echo $historyModel->getTo_Status();
+       
+        $order=Mage::getModel('sales/order')->addData('order_id',$id)
+             ->addData('status',$historyModel->getTo_Status())->save();
+        $this->setRedirect("customer/account/history");
     }
 
 

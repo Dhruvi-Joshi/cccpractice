@@ -3,12 +3,13 @@
 $banner_model = $this->getBanner();
 // $id=$banner_model->getBanner_Id();
 // echo $id;
- ?><html>
+ ?>
+ <!-- <html>
 <html>
 <head>
     <title>Admin Banner</title>
-</head>
-<style>
+</head> -->
+<!-- <style>
      /* body {
             display: flex;
             align-items: center;
@@ -41,53 +42,42 @@ $banner_model = $this->getBanner();
 
 
 
-</style>
+</style> -->
 <body>
     <!-- <form method="POST" action="<php echo $this->getUrl("catalog/product/save") ?>"> -->
-    <form method="POST" enctype="multipart/form-data" action="<?php echo $this->getUrl("admin/banner/save") ?>" >
-    <!-- <php print_r($this) ?> -->
-    <h1 style= "color:blue; font-size:200%;">Admin banner Form</h1>
+    <form method="POST" enctype="multipart/form-data" action="<?php echo $this->getUrl("admin/banner/save") ?>" class="col-md-6 mx-auto">
+    <input type="hidden" name="banner[banner_id]" value="<?php echo $banner_model->getBanner_Id()?>">
 
-    <label>banner Id:</label>
-                <input type="text" name="banner[banner_id]" value="<?php echo $banner_model->getBanner_Id()?>"><br><br>
-       
-       
-                
-    <label>Title:</label>
-                <input type="text" name="banner[title]" value="<?php echo $banner_model->getTitle()?>"><br><br>
-               
-     <label>Banner Image:</label><!--//accept=".jpg,.jpeg,.png" class="box" -->
-     <img src="<?php echo Mage::getBaseUrl().'media/banner/'.$banner_model->getBanner_Image(); ?>" alt="Banner Image" style="width: 50px; height: auto;"></td>
-                  <input type="file" name="banner[banner_image]" value="<?php echo $banner_model->getBanner_Image(); ?>"/><br><br>
+    <div class="form-group">
+       <center> <h1 style="color:blue; font-size:200%;">Admin banner Form</h1></center>
+    </div>
 
-                  <!-- <php
-                    // Check if the banner_model has an existing image path
-                    $existingImagePath = $banner_model->getBanner_Image();
-                    if (!empty($existingImagePath)) {
-                        echo '<img src="' . Mage::getBaseUrl().'media/banner/' . $existingImagePath . '" alt="Current Banner Image" style="max-width: 200px; max-height: 200px;"><br>';
-                        echo '<label>Current Image Path:</label>' . $existingImagePath . '<br>';
-                    }
-                    ?> -->
+    <div class="form-group">
+        <label for="title">Title:</label>
+        <input type="text" name="banner[title]" class="form-control" value="<?php echo $banner_model->getTitle()?>">
+    </div>
 
+    <div class="form-group">
+        <label for="banner_image">Banner Image:</label>
+        <img src="<?php echo Mage::getBaseUrl().'media/banner/'.$banner_model->getBanner_Image(); ?>" class="form-control-file" alt="Banner Image" style="width: 200px; height: 150px; padding:10px;">
+        <input type="file" name="banner[banner_image]" class="form-control-file">
+    </div>
 
-    <label>Status:</label>
-                <select name="banner[status]" >
-                    <option value='0'>Enabled</option>
-                    <option value='1'>Disabled</option>
-            <!-- <option value="1">Disabled</option> -->
-        </select><br><br>
+    <div class="form-group">
+        <label for="status">Status:</label>
+        <select name="banner[status]" class="form-control">
+            <option value='0'>Enabled</option>
+            <option value='1'>Disabled</option>
+        </select>
+    </div>
 
-    <label>Show On:</label>
-                <input type="text" name="banner[show_on]" placeholder="show_on" value="<?php echo $banner_model->getShow_On()?>"><br><br>
-   
-                    
-                    
-                
-        
-                <input type="submit" name="submit" value="submit"style="color:blue; font-size:150%;border-radius:80px;">
-               <!-- <a href="functions.php?edit=?php echo $no;?" >edit</a>-->
+    <div class="form-group">
+        <label for="show_on">Show On:</label>
+        <input type="text" name="banner[show_on]" class="form-control" placeholder="show_on" value="<?php echo $banner_model->getShow_On()?>">
+    </div>
 
-                
-            </form>
+    <button type="submit" name="submit" class="btn btn-primary">Submit</button>
+</form>
+
 </body>
 </html> 

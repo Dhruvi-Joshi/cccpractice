@@ -10,10 +10,7 @@
  
 ?>
 <!-- value="<php echo $product_model->getid()?>" -->
-<html>
-<head>
-    <title>Customer</title>
-</head>
+
 <style>
      /* body {
             display: flex;
@@ -50,7 +47,7 @@
 </style>
 <body>
     <!-- <form method="POST" action="<php echo $this->getUrl("catalog/product/save") ?>"> -->
-    <form method="POST" id ="login-form"action="<?php echo $this->getUrl("customer/account/login") ?>">
+    <form method="POST" id ="login-form" action="<?php echo $this->getUrl("customer/account/login") ?>">
     <!-- <php print_r($this) ?> -->
     <h1 style= "color:blue; font-size:200%;">Customer Login</h1>
 
@@ -77,8 +74,9 @@
 
             <script type="text/javascript">
                  function loginAction(btn){
-                    var form=$($('#login-form')[0]);
+                var form=$($('#login-form')[0]);
                 console.log(form.serialize());
+                jQuery.noConflict(); //for error
                 $.ajax({
                     url: form.action,
                     type:'POST',
@@ -93,7 +91,7 @@
                     // $( this ).addClass( "done" );
                     if(output.type =="sucess"){
                         alert(output.message);
-                        window.location.href="<?php echo $this->getUrl('customer/account/dashboard');?>";
+                        window.location.href="<?php echo $this->getUrl('page/index/index');?>";
 
                     }
                     else{
@@ -102,5 +100,3 @@
                 });
                 }
                 </script>
-</body>
-</html> 

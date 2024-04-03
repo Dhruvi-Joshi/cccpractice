@@ -8,136 +8,115 @@ $product_model = $this->getProduct();
 // echo $id;
 // $value=$product_model->getsku();
 // echo $value;
- ?><html>
-<head>
-    <title>PRODUCT BILL</title>
-</head>
-<style>
-     /* body {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: pink; 
-        } */
-
-     form {
-            width: 50%;
-            text-align: center;
-           
-        }
-
-    
-        label {
-            color:blue;
-            display: inline-block;
-            width: 150px;
-            margin-right: 10px;
-            text-align: left;
-        }
-        input, select {
-            width: 200px;
-        }
-        #but{
-            width: 15px;
-            margin-left: 35px;
-            
-        }
-
-
-
-</style>
+ ?>
 <body>
-    <!-- <form method="POST" action="<php echo $this->getUrl("catalog/product/save") ?>"> -->
-    <form method="POST" enctype="multipart/form-data" action="<?php echo $this->getUrl("admin/catalog_product/save") ?>">
-    <!-- <php print_r($this) ?> -->
-    <h1 style= "color:blue; font-size:200%;">Product Form</h1>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <form method="POST" enctype="multipart/form-data" action="<?php echo $this->getUrl("admin/catalog_product/save") ?>">
+                    <h1 class="text-center mb-4" style="color: blue; font-size: 200%;">Product Form</h1>
 
-    <label>Product Id:</label>
-                <input type="text" name="data[product_id]" value="<?php echo $product_model->getId()?>"><br><br>
-       
-       
-                
-    <label>SKU:</label>
-                <input type="text" name="data[sku]" value="<?php echo $product_model->getSku()?>"><br><br>
-        
-    <label>Product Name:</label>
-                <input type="text" name="data[name]" placeholder="Enter product name" value="<?php echo $product_model->getName()?>"required><br><br>
-                
-    <label>Color:</label>
-                <input type="text" name="data[color]" placeholder="Enter color" value="<?php echo $product_model->getColor()?>"><br><br>
+                    <input type="hidden" name="data[product_id]" value="<?php echo $product_model->getId()?>">
 
-    <label>size:</label>
-                <input type="text" name="data[size]" placeholder="size" value="<?php echo $product_model->getSize()?>"><br><br>
-        
-    <label>description:</label>
-                <input type="textarea" name="data[description]" placeholder="description" value="<?php echo $product_model->getDescription()?>"><br><br>
-        
-    <label>image link:</label>
-                <input type="file" name="data[image_link]" value="<?php echo $product_model->getImage_Link()?>"/><br><br>
-           
-    <label>link:</label>
-                <input type="text" name="data[link]" placeholder="link" value="<?php echo $product_model->getLink()?>"><br><br>
-               
-    <label>Category:</label>
-                <select name="data[Category_id]">
-
-                <option value="1"<?php echo(($product_model->getCategory())=='bar & game room')?"selected":''; ?>>bar & game room</option>
-                <option value="2"<?php echo(($product_model->getCategory())=='bedroom')?"selected":''; ?>>bedroom</option>
-                <option value="3"<?php echo(($product_model->getCategory())=='decor')?"selected":''; ?>>decor</option>
-                <option value="4"<?php echo(($product_model->getCategory())=='dining & kitchen')?"selected":''; ?>>dining & kitchen</option>
-                <option value="5"<?php echo(($product_model->getCategory())=='lighting')?"selected":''; ?>>lighting</option>
-                <option value="6"<?php echo(($product_model->getCategory())=='living room')?"selected":''; ?>>living room</option>
-                <option value="7"<?php echo(($product_model->getCategory())=='mattresses')?"selected":''; ?>>mattresses</option>
-                <option value="8"<?php echo(($product_model->getCategory())=='office')?"selected":''; ?>>office</option>
-                <option value="9"<?php echo(($product_model->getCategory())=='outdoor')?"selected":''; ?>>outdoor</option>
-                 
-                    <!-- <option value="1">bar & game room</option>
-                    <option value="2">bedroom</option>
-                    <option value="3">decor</option>
-                    <option value="4">dining & kitchen</option>
-                    <option value="5">lighting</option>
-                    <option value="6">living room</option>
-                    <option value="7">mattresses</option>
-                    <option value="8">office</option>
-                    <option value="9">outdoor</option> -->
-                </select><br><br>
-
-    <label>Price:</label>
-                <input type="text" name="data[price]" placeholder="enter price" value="<?php echo $product_model->getprice()?>"><br><br>
-        
-    <label>Manufacturer Cost:</label>
-                <input type="text" name="data[mfr_cost]" placeholder="enter manufacturer cost" value="<?php echo $product_model->getmfr_cost()?>"><br><br>
-        
-    <label>Shipping Cost:</label>
-                <input type="text" name="data[shipping_cost]" placeholder="enter shipping cost" value="<?php echo $product_model->getshipping_cost()?>"><br><br>
-        
-    <label>Total Cost:</label>
-                <input type="text" name="data[total_cost]" placeholder="enter total cost" value="<?php echo $product_model->gettotal_cost()?>"><br><br>
-
-    <label>Margin percentage:</label>
-                <input type="text" name="data[margin_percentage]" placeholder="enter total cost" value="<?php echo $product_model->getmargin_percentage()?>"><br><br>
-
-    <label>Min price:</label>
-                <input type="text" name="data[min_price]" placeholder="enter total cost" value="<?php echo $product_model->getmin_price()?>"><br><br>
-        
-                
-    <label>Status</label>
-                <select name="data[status]" >
-                    <option value="0"<?php echo(($product_model->getStatus())=='Enabled')?"selected":''; ?>>Enabled</option>
-                    <option value="1"<?php echo(($product_model->getStatus())=='Disabled')?"selected":''; ?>>Disabled</option>
+                    <div class="form-group">
+                        <label for="sku">SKU:</label>
+                        <input type="text" name="data[sku]" id="sku" class="form-control" value="<?php echo $product_model->getSku()?>">
+                    </div>
                     
+                    <div class="form-group">
+                        <label for="name">Product Name:</label>
+                        <input type="text" name="data[name]" id="name" class="form-control" placeholder="Enter product name" value="<?php echo $product_model->getName()?>" required>
+                    </div>
                     
-                    <!-- <option value="1">Disabled</option> -->
-                </select><br><br>
-        
-                
-        
-                <input type="submit" name="submit" value="submit"style="color:blue; font-size:150%;border-radius:80px;">
-               <!-- <a href="functions.php?edit=?php echo $no;?" >edit</a>-->
+                    <div class="form-group">
+                        <label for="color">Color:</label>
+                        <input type="text" name="data[color]" id="color" class="form-control" placeholder="Enter color" value="<?php echo $product_model->getColor()?>">
+                    </div>
 
-             
+                    <div class="form-group">
+                        <label for="size">Size:</label>
+                        <input type="text" name="data[size]" id="size" class="form-control" placeholder="Enter size" value="<?php echo $product_model->getSize()?>">
+                    </div>
 
-                
-            </form>
+                    <div class="form-group">
+                        <label for="description">Description:</label>
+                        <textarea name="data[description]" id="description" class="form-control" placeholder="Enter description"><?php echo $product_model->getDescription()?></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="image_link">Image Link:</label>
+                        <input type="file" name="data[image_link]" id="image_link" class="form-control-file">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="link">Link:</label>
+                        <input type="text" name="data[link]" id="link" class="form-control" placeholder="Enter link" value="<?php echo $product_model->getLink()?>">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="category">Category:</label>
+                        <select name="data[category_id]" id="category" class="form-control">
+                            <option value="1"<?php echo(($product_model->getCategory())=='sofas')?"selected":''; ?>>Sofas</option>
+                            <option value="2"<?php echo(($product_model->getCategory())=='living')?"selected":''; ?>>living</option>
+                            <option value="3"<?php echo(($product_model->getCategory())=='bedroom')?"selected":''; ?>>bedroom</option>
+                            <option value="4"<?php echo(($product_model->getCategory())=='dining & kitchen')?"selected":''; ?>>dining & kitchen</option>
+                            <option value="5"<?php echo(($product_model->getCategory())=='storage')?"selected":''; ?>>storage</option>
+                            <option value="6"<?php echo(($product_model->getCategory())=='study & office')?"selected":''; ?>>study & office</option>
+                            <option value="7"<?php echo(($product_model->getCategory())=='kids room')?"selected":''; ?>>kids room</option>
+                            <option value="8"<?php echo(($product_model->getCategory())=='decor')?"selected":''; ?>>decor</option>
+                            <option value="9"<?php echo(($product_model->getCategory())=='lamps & lighting')?"selected":''; ?>>lamps & lighting</option>
+                            <option value="10"<?php echo(($product_model->getCategory())=='outdoor')?"selected":''; ?>>outdoor</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="link">Price:</label>
+                        <input type="text" name="data[price]" id="link" class="form-control" placeholder="Enter price" value="<?php echo $product_model->getPrice()?>">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="link">Manufacturer cost:</label>
+                        <input type="text" name="data[mfr_cost]" id="mfr_cost" class="form-control" placeholder="Enter mfr_cost" value="<?php echo $product_model->getmfr_cost()?>">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="link">Shipping Cost:</label>
+                        <input type="text" name="data[shipping_cost]" id="link" class="form-control" placeholder="Enter shipping cost" value="<?php echo $product_model->getshipping_cost()?>">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="link">Total Cost:</label>
+                        <input type="text" name="data[total_cost]" id="total_cost" class="form-control" placeholder="Enter link" value="<?php echo $product_model->gettotal_cost()?>">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="link">Margin percentage:</label>
+                        <input type="text" name="data[margin_percentage]" id="margin_percentage" class="form-control" placeholder="Enter margin percentage" value="<?php echo $product_model->getmargin_percentage()?>">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="link">Min price:</label>
+                        <input type="text" name="data[min_price]" id="link" class="form-control" placeholder="Enter min_price" value="<?php echo $product_model->getmin_price()?>">
+                    </div>
+
+
+
+                    <div class="form-group">
+                        <label for="status">Status:</label>
+                        <select name="data[status]" id="status" class="form-control">
+                            <option value="0"<?php echo(($product_model->getStatu())=='Enabled')?"selected":''; ?>>Enabled</option>
+                            <option value="1"<?php echo(($product_model->getStatu())=='Disabled')?"selected":''; ?>>Disabled</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="submit" name="submit" value="Submit" class="btn btn-primary btn-block">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS (optional) -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
-</html> 

@@ -22,7 +22,7 @@ class Admin_Controller_Catalog_Product extends Core_Controller_Admin_Action{
         // echo "<pre>";
         $data=$this->getRequest()->getParams('data');
         print_r($data);
-        echo "<pre>";
+        // echo "<pre>";
         print_r($_FILES);
         //echo "<br>";$abc= $_FILES['data']['name']['image_link'];echo $abc;echo "<br>";
         $data['image_link'] = $_FILES['data']['name']['image_link'];
@@ -39,7 +39,7 @@ class Admin_Controller_Catalog_Product extends Core_Controller_Admin_Action{
             $productModel=Mage::getModel('catalog/product');
             $productModel->setData($data)->save();
             print_r($productModel);
-            $this->setRedirect('admin/catalog_product/list');
+           $this->setRedirect('admin/catalog_product/list');
         }
         // $productModel=Mage::getModel('catalog/product');
         //  $productModel->setData($data);

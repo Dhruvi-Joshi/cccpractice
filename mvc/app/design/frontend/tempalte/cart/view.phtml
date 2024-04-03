@@ -18,10 +18,11 @@ $history=$this->historyDetails();
 
 
 
-
 ?>
 <div class="page-content container">
     <div class="page-header text-blue-d2">
+
+    <?php foreach ($order as $data) { ?>
         <h1 class="page-title text-secondary-d1">
             Order-ID:
             <small class="page-info">
@@ -78,7 +79,7 @@ $history=$this->historyDetails();
                     </div>
                     <!-- /.col -->
 
-                    <div class="text-95 col-sm-6 align-self-start d-sm-flex justify-content-end">
+                    <div class="text-95 col-sm-3 align-self-start d-sm-flex justify-content-end">
                         <hr class="d-sm-none" />
                         <div class="text-grey-m2">
                             <div class="mt-1 mb-2 text-secondary-m1 text-600 text-125">
@@ -95,7 +96,7 @@ $history=$this->historyDetails();
 
                             <div class="my-2"><i class="fa fa-circle text-blue-m2 text-xs mr-1"></i> <span class="text-600 text-90">Shipping Postcode:</span><?php echo $addr->getShipping_post_code() ?></div>
 
-                            <div class="my-2"><i class="fa fa-circle text-blue-m2 text-xs mr-1"></i> <span class="text-600 text-90">Status:</span> <span class="badge badge-warning badge-pill px-25">ghthy</span></div>
+                            <div class="my-2"><i class="fa fa-circle text-blue-m2 text-xs mr-1"></i> <span class="text-600 text-90">Status:</span> <span class="badge badge-warning badge-pill px-25"><?php echo $data->getstatus() ?></span></div>
                         </div>
                     </div>
                     <!-- /.col --><?php } ?>
@@ -114,11 +115,12 @@ $history=$this->historyDetails();
                     <div class="col-1 col-sm-1">Price</div> 
                     <div class="col-1 col-sm-1">Qty</div> 
                     <div class="col-1 col-sm-1">total cost</div> 
-                </div>
+                </div><br>
 
                 <div class="text-95 text-secondary-d3">
 
-                    <?php foreach ($items as $item) {  ?>
+                    <?php foreach ($items as $item) {
+                         foreach ($product as $product) {  ?>
                         <div class="row mb-2 mb-sm-0 py-25">
                             <div class="col-3 col-sm-2"><?php echo $product->getName()?></div> 
                             <div class="col-3 col-sm-2"><img src="<?php echo Mage::getBaseUrl().'media/product/'.$product->getImage_Link(); ?>"
@@ -132,15 +134,10 @@ $history=$this->historyDetails();
                             <div class="col-1 col-sm-1"><?php echo $item->getPrice()?></div> 
                             <div class="col-1 col-sm-1"><?php echo $item->getQty()?></div> 
                             <div class="col-1 col-sm-1"><?php echo $item->getRow_Total()?></div> 
-                        </div>
+                        </div><br>
 
-                        <?php } ?>
-
-                        
-
-                        
-
-                        
+                        <?php } }?><br><br>
+    
                     </div>
                     <hr class="row brc-default-l1 mx-n1 mb-4" />
 
@@ -161,13 +158,13 @@ $history=$this->historyDetails();
                     <!-- /.col -->
                     <!-- <div class="col-12 col-sm-5 text-grey text-90 order-first order-sm-last"> -->
 
-                    <div class="text-95 col-sm-4 align-self-start d-sm-flex justify-content-end">
+                    <div class="text-95 col-sm-3 align-self-start d-sm-flex justify-content-end">
                         <hr class="d-sm-none" />
                         <div class="text-grey-m2">
                             <div class="mt-1 mb-2 text-secondary-m1 text-600 text-125">
-                            <b class="text-600">Payment Details:</b>
+                            <b class="text-600">Payment Details: </b>
                             </div>
-                            <div class="my-2"><i class="fa fa-circle text-blue-m2 text-xs mr-1"></i> <span class="text-600 text-90">Payment Type:</span><?php echo $payment->getPayment_Method() ?></div>
+                            <div class="my-2"><i class="fa fa-circle text-blue-m2 text-xs mr-1"></i> <span class="text-600 text-90">Payment Type: </span><?php echo $payment->getPayment_Method() ?></div>
                             <?php if($payment->getCard_number() != 0){ ?> 
                             <div class="my-2"><i class="fa fa-circle text-blue-m2 text-xs mr-1"></i> <span class="text-600 text-90">Card Number:</span><?php echo $payment->getCard_number() ?></div>
 
@@ -212,10 +209,31 @@ $history=$this->historyDetails();
                         <div class="col-12 col-sm-7 text-grey-d2 text-95 mt-2 mt-lg-0">
                         <div class="mt-1 mb-2 text-secondary-m1 text-600 text-125">
                             <b class="text-600">Status History:</b>
+
+                            <div class="row text-600 text-white bgc-default-tp1 py-25">
+                                <div class="col-3 col-sm-4">Status</div> 
+                                <div class="col-3 col-sm-4 ">Date</div>     
+                            </div>
+
+                            <div class="text-95 text-secondary-d3">
+                                    <div class="row mb-2 mb-sm-0 py-25">
+                                        <div class="col-1 col-sm-4">Order At</div> 
+                                        <div class="col-1 col-sm-4"><?php echo $data->getCreate_at()?></div> 
+                                    </div>
+                            </div>
+                        
+                            <div class="text-95 text-secondary-d3">
+                            <?php foreach ($history as $history) {  ?>
+                                    <div class="row mb-2 mb-sm-0 py-25">
+                                        <div class="col-1 col-sm-4"><?php echo $history->getto_status()?></div> 
+                                        <div class="col-1 col-sm-4"><?php echo $history->getDate()?></div> 
+                                    </div>
+                            <?php } ?>
+                            </div>
                         </div>
                         </div>
 
-                        <div class="col-12 col-sm-5 text-grey text-90 order-first order-sm-last">
+                        <div class="col-12 col-sm-3 text-grey text-90 order-first order-sm-last">
 
                         <div class="mt-1 mb-2 text-secondary-m1 text-600 text-125">
                             <b class="text-600">Order Summery:</b>
@@ -225,16 +243,16 @@ $history=$this->historyDetails();
                                     SubTotal
                                 </div>
                                 <div class="col-5">
-                                    <span class="text-120 text-secondary-d1">$2,250</span>
+                                    <span class="text-120 text-secondary-d1"><?php echo $data->getGrand_Total() ?></span>
                                 </div>
                             </div>
 
                             <div class="row my-2">
                                 <div class="col-7 text-right">
-                                    Tax (10%)
+                                    Tax 
                                 </div>
                                 <div class="col-5">
-                                    <span class="text-110 text-secondary-d1">$225</span>
+                                    <span class="text-110 text-secondary-d1"><?php echo $data->getTax_percent() ?></span>
                                 </div>
                             </div>
 
@@ -243,7 +261,7 @@ $history=$this->historyDetails();
                                     Total Amount
                                 </div>
                                 <div class="col-5">
-                                    <span class="text-150 text-success-d3 opacity-2">$2,475</span>
+                                    <span class="text-150 text-success-d3 opacity-2"><?php echo $data->getGrand_Total() ?></span>
                                 </div>
                             </div>
                         </div>
@@ -257,5 +275,6 @@ $history=$this->historyDetails();
                 </div>
             </div>
         </div>
+        <?php } ?>
     </div>
 </div>

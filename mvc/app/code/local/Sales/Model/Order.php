@@ -7,5 +7,11 @@ class Sales_Model_Order extends Core_Model_Abstract{
         $this->modelClass="Sales/Order";
     }
 
+    public function _beforeSave(){
+        $prefix = 'ABC';
+        $sequentialNumber = sizeof(Mage::getModel('sales/order')->getCollection()->getData()) + 1;
+        $this->addData('order_number', $prefix . $sequentialNumber);
+    }
+
 }
 ?>

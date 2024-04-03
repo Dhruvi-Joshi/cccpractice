@@ -12,8 +12,8 @@ if(isset($_GET['id'])){
 // var_dump(isset($test['where']));
 
 // die;
-
-
+$categoryCollection=Mage::getModel('category/category')->load($no);
+                    
 $productCollection = Mage::getModel('catalog/product')->getCollection()
     ->addFieldToFilter('category_id',$no);
     $productCollection->groupBy('total_cost');
@@ -30,59 +30,51 @@ $productCollection = Mage::getModel('catalog/product')->getCollection()
     //   var_dump($product->getsku());
 ?>
 
-<table>
-<div class="table" style="margin-top:20px;">
-    <table border="1px solid black">
-        <tr>
-            <th>id</th>
-            <th>sku</th>
-            <th>name</th>
-            <th>color</th>
-            <th>size</th>
-            <th>description</th>
-            <th>image link</th>
-            <th>link</th>
-            <th>Price</th>
-            <th>mfr_cost</th>
-            <th>shipping cost</th>
-            <th>total cost</th>
-            <th>margin percentage</th>
-            <th>margin price</th>
-            
+<section>
+  <div class="text-center container py-5">
+    <h4 class="mt-4 mb-5"><strong><?php echo $categoryCollection->getCategory_name(); ?></strong></h4>
 
-            <th>View</th>
-            <th>Edit</th>
-            <th>Delete</th>
-        </tr>
-        <tr style="text-align: center;"><td colspan="17"><?php echo $error ?></td></tr>
-        <?php foreach($productCollection->getData() as $product) { ?>
+    <div class="row">
+    <?php foreach($productCollection->getData() as $product) {  
+       ?>
 
-            
-        <tr>
-        <td><?php print_r($product->getid());?></td>
-        <td><?php print_r($product->getsku());?></td>
-        <td><?php print_r($product->getName());?></td>
-        <td><?php print_r($product->getcolor());?></td>
-        <td><?php print_r($product->getsize());?></td>
-        <td><?php print_r($product->getdescription());?></td>
-        <td><?php print_r($product->getimage_link());?></td>
-        <td><?php print_r($product->getlink()); ?></td>
-        <td><?php print_r($product->getprice());?></td>
-        <td><?php print_r($product->getMfr_Cost());?></td>
-        <td><?php print_r($product->getshipping_cost());?></td>
-        <td><?php print_r($product->gettotal_cost());?></td>
-        <td><?php print_r($product->getmargin_percentage());?></td>
-        <td><?php print_r($product->getmin_price());?></td>
+      <div class="col-lg-4 col-md-12 mb-4">
+        <div class="card">
+          <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light"
+            data-mdb-ripple-color="light">
+            <img src="<?php echo Mage::getBaseUrl().'media/product/'.$product->getImage_Link(); ?>" style="height:200px;width:150px;"
+              class="w-100" />
+            <a href="#!">
+              <!-- <div class="mask">
+                <div class="d-flex justify-content-start align-items-end h-100">
+                  <h5><span class="badge bg-primary ms-2">New</span></h5>
+                </div>
+              </div> -->
+              <div class="hover-overlay">
+                <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+              </div>
+            </a>
+          </div>
+          <div class="card-body">
+            <a href="<?php echo $this->getUrl('catalog/product/view') ?>?id=<?php echo $product->getId() ?>" class="text-reset">
+              <h5 class="card-title mb-3"><?php echo $product->getname(); ?></h5>
+            </a>
+            <h6 class="mb-3"><?php echo $product->getDescription(); ?></h6>
+            <h6 class="mb-3"><?php echo $product->getSize(); ?></h6>
+            <h6 class="mb-3"><?php echo $product->getTotal_Cost(); ?></h6>
 
-        <td><button><a href='<?php echo $this->getUrl('catalog/product/view')?>?id=<?php echo $product->getId()?>'>View</a></button></td>
-        <td><button class="edit-button"><a href='<?php echo $this->getUrl('admin/catalog_product/form')?>?id=<?php echo $product->getId()?>'>Edit</a></button></td>
-        <td><button class="delete-button"><a href='<?php echo $this->getUrl('admin/catalog_product/delete')?>?id=<?php echo $product->getId()?>'>Delete</a></button></td>
-        </tr>
-        <?php } ?>
-    </table>
-</div>
-<br>
+            <a href="<?php echo $this->getUrl('catalog/product/view') ?>?id=<?php echo $product->getId() ?>" class="btn btn-primary btn-sm">Add To Cart</a>
 
+          </div>
+        </div>
+      </div>
+      <?php } ?>
+
+    </div>
+
+
+  </div>
+</section>
 
 
 

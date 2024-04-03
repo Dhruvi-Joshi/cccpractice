@@ -14,6 +14,7 @@ class Sales_Block_Admin_View extends Core_Block_Template{
        }else{
         $error= "select order";
        }
+       
         return Mage::getModel('sales/order')->getCollection()->addFieldToFilter('order_id',$no)->getData();
     }
 
@@ -38,11 +39,33 @@ class Sales_Block_Admin_View extends Core_Block_Template{
     }
 
     public function productDetails(){
-        foreach ($this->itemsDetails() as $item) { 
-             $no= $item->getProduct_Id();
-        }   
-        return Mage::getModel('catalog/product')
-        ->load($no);
+
+        $productIds = array(); // Array to store product IDs
+    
+    // Iterate over items to get product IDs
+    foreach ($this->itemsDetails() as $item) { 
+        $productIds[] = $item->getProduct_Id();
+    }
+    
+    $products = array();
+    foreach ($productIds as $productId) {
+        $product = Mage::getModel('catalog/product')->load($productId);
+        $products[] = $product;
+    }
+    // print_r($products);
+    return $products;
+
+
+        // foreach ($this->itemsDetails() as $item) { 
+        //      $no= $item->getProduct_Id();
+             
+        //      echo $no;
+             
+        // }  
+        // return Mage::getModel('catalog/product')
+        // ->load($no); 
+        
+        
     }
 
     public function paymentDetails(){

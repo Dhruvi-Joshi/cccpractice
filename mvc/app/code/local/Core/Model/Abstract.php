@@ -71,7 +71,7 @@ class Core_Model_Abstract{
 
     public function getCollection(){
         $collection = new $this->collectionClass();
-        // var_dump($collection);
+        //echo "<pre>";var_dump($collection);
         $collection->setResource($this->getResource());
         $collection->setModelClass($this->modelClass);
         $collection->select();

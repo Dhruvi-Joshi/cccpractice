@@ -2,6 +2,11 @@
 
 
 $bannerCollection = Mage::getModel('banner/banner')->getCollection();
+$productCollection=Mage::getModel('catalog/product')->getCollection();
+function category($id){
+  $categoryCollection=Mage::getModel('category/category')->getCollection()->addFieldToFilter('category_id',$id);
+  return $categoryCollection;
+}
 //print_r($bannerCollection->getData());
 
 //  foreach($bannerCollection->getData() as $product) { 
@@ -15,12 +20,12 @@ $bannerCollection = Mage::getModel('banner/banner')->getCollection();
         <!-- slides -->
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <img src="https://i.imgur.com/weXVL8M.jpg" style="height:900px;width:900px;" alt="Hills">
+            <img src="<?php echo Mage::getBaseUrl().'media/banner/'."main.jpg"; ?>" style="height:600px;width:1200px;"  alt="Banner">
           </div>
 
           <?php foreach($bannerCollection->getData() as $key =>$product) { ?>
           <div class="carousel-item">
-            <img src="<?php echo Mage::getBaseUrl().'media/banner/'.$product->getBanner_Image(); ?>" style="height:900px;width:900px;" alt="Hills">
+            <img src="<?php echo Mage::getBaseUrl().'media/banner/'.$product->getBanner_Image(); ?>" style="height:600px;width:1200px;" alt="Banner">
           </div>
 
         <?php } ?>
@@ -38,33 +43,56 @@ $bannerCollection = Mage::getModel('banner/banner')->getCollection();
     </div>
   </div>
 </div>
-<!--<div id="carouselExampleInterval2" class="carousel slide" data-mdb-ride="carousel"
-  data-mdb-interval="false">
-  <div class="carousel-inner">
-    <php foreach($bannerCollection->getData() as $key =>$product) { ?>
-    <div class="carousel-item <php echo ($key == 0) ? 'active' : ''; ?>">
-      <img src="<php echo Mage::getBaseUrl().'media/banner/'.$product->getBanner_Image(); ?>" class="d-block w-100"
-        alt="Wild Landscape" />
-        <input type="text" value="<php echo  Mage::getBaseUrl().'media/banner/'.$product->getBanner_Image();  ?>">
+
+<hr class="row brc-default-l1 mx-n1 mb-4" />
+
+<section style="background-color: #eee;">
+  <div class="text-center container py-5">
+    <h4 class="mt-4 mb-5"><strong>Products</strong></h4>
+
+    <div class="row">
+    <?php foreach($productCollection->getData() as $product) {  
+      $cid=$product->getCategory_Id();
+      $category=category($cid); ?>
+
+      <div class="col-lg-4 col-md-12 mb-4">
+        <div class="card">
+          <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light"
+            data-mdb-ripple-color="light">
+            <img src="<?php echo Mage::getBaseUrl().'media/product/'.$product->getImage_Link(); ?>" style="height:150px;width:80px;"
+              class="w-100" />
+            <a href="#!">
+              <!-- <div class="mask">
+                <div class="d-flex justify-content-start align-items-end h-100">
+                  <h5><span class="badge bg-primary ms-2">New</span></h5>
+                </div>
+              </div> -->
+              <div class="hover-overlay">
+                <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+              </div>
+            </a>
+          </div>
+          <div class="card-body">
+            <a href="<?php echo $this->getUrl('catalog/product/view') ?>?id=<?php echo $product->getId() ?>" class="text-reset">
+              <h5 class="card-title mb-3"><?php echo $product->getname(); ?></h5>
+            </a>
+            <?php foreach($category->getData() as $category) {?>
+            <a href="<?php echo $this->getUrl('catalog/category/view') ?>?id=<?php echo $cid ?>" class="text-reset">
+              <p><?php echo $category->getCategory_name(); ?></p>
+            </a><?php } ?>
+            <h6 class="mb-3"><?php echo $product->getTotal_Cost(); ?></h6>
+
+            <a href="<?php echo $this->getUrl('catalog/product/view') ?>?id=<?php echo $product->getId() ?>" class="btn btn-primary btn-sm">Add To Cart</a>
+
+          </div>
+        </div>
+      </div>
+      <?php } ?>
+
     </div>
 
-    <php }?>
-   // <div class="carousel-item">
-      <img src="https://mdbcdn.b-cdn.net/img/new/slides/042.webp" class="d-block w-100" alt="Camera" />
-    </div>
-    <div class="carousel-item">
-      <img src="https://mdbcdn.b-cdn.net/img/new/slides/043.webp" class="d-block w-100"
-        alt="Exotic Fruits" />
-    </div> //
+
   </div>
-  <button class="carousel-control-prev" data-mdb-target="#carouselExampleInterval2" type="button"
-    data-mdb-slide="prev" style="background-color: #007bff; border: none;">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" data-mdb-target="#carouselExampleInterval2" type="button"
-    data-mdb-slide="next" style="background-color: #007bff; border: none;">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
-</div> -->
+</section>
+
+

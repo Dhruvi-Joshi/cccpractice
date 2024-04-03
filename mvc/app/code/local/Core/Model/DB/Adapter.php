@@ -25,6 +25,7 @@ class Core_Model_DB_Adapter{
     }
 
     public function fetchAll($query){
+        // print_r($query);
         $row = [];
         $sql = mysqli_query($this->connect(),$query);
         while($_row = mysqli_fetch_assoc($sql))
