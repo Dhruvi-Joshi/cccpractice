@@ -29,7 +29,7 @@ $orderCollection=$this->historyDetails();
                                 <th>Grand Total</th>
                                 <th>Status</th>
                                 <th>create at</th>
-                                <th>Edit</th>
+                                <th>View</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -44,7 +44,7 @@ $orderCollection=$this->historyDetails();
                                     <td><?php echo $order->getStatus(); ?></td>
                                     <td><?php echo $order->getCreate_at(); ?></td>
                                     <td>
-                                        <a href="<?php echo $this->getUrl('customer/account/order') ?>?id=<?php echo $order->getOrder_Id() ?>" class="btn btn-primary btn-sm">Edit</a>
+                                        <a href="<?php echo $this->getUrl('customer/account/order') ?>?id=<?php echo $order->getOrder_Id() ?>" class="btn btn-primary btn-sm">View</a>
                                     </td>
                                     
                                 </tr>

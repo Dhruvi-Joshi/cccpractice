@@ -10,9 +10,9 @@ class Sales_Model_Quote_Item extends Core_Model_Abstract{
     protected function _beforeSave(){
         if($this->getProductId()){
             
-          $row_total =  $this->getProduct()->getPrice() * $this->getQty() ;
+          $row_total =  $this->getProduct()->getTotal_cost() * $this->getQty() ;
             $this->addData('row_total',$row_total);
-            $this->addData('price',$this->getProduct()->getPrice());
+            $this->addData('price',$this->getProduct()->getTotal_cost());
         }
         
     }

@@ -3,9 +3,10 @@
 class Admin_Controller_Catalog_Product extends Core_Controller_Admin_Action{
 
     public function formAction(){
+        $this->getLayout()->setTemplate('core/admin.phtml');
         $layout=$this->getLayout();
-        $layout->getChild("head")->addCss('../../skin/css/header.css');
-        $layout->getChild("head")->addCss('../../skin/css/footer.css');
+        // $layout->getChild("head")->addCss('../../skin/css/header.css');
+        // $layout->getChild("head")->addCss('../../skin/css/footer.css');
         
         $child= $layout->getChild("content");
         $form=$layout->createBlock("catalog/admin_product_form")->setTemplate("catalog/admin/product/form.phtml");
@@ -73,13 +74,14 @@ class Admin_Controller_Catalog_Product extends Core_Controller_Admin_Action{
     }
 
     public function listAction(){
+        $this->getLayout()->setTemplate('core/admin.phtml');
         $layout=$this->getLayout();
         // $layout->getChild("head")->addJs('js/page.js');
         // $layout->getChild("head")->addJs('js/head.js');
         // $layout->getChild("head")->addCss('css/page.css');
         // $layout->getChild("head")->addCss('css/head.css');
-        $layout->getChild("head")->addCss('../../skin/css/header.css');
-        $layout->getChild("head")->addCss('../../skin/css/footer.css');
+        // $layout->getChild("head")->addCss('../../skin/css/header.css');
+        // $layout->getChild("head")->addCss('../../skin/css/footer.css');
         
         $child= $layout->getChild("content");
 

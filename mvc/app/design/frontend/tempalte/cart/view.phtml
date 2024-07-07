@@ -27,7 +27,7 @@ $history=$this->historyDetails();
             Order-ID:
             <small class="page-info">
                 <i class="fa fa-angle-double-right text-80"></i>
-                 #111-222
+                <?php echo $data->getorder_number() ?>
             </small>
         </h1>
 
@@ -269,9 +269,27 @@ $history=$this->historyDetails();
 
                     <hr />
 
-                    <div>
+                    <?php if($data->getstatus() == 'cancel_request'){  ?>  
+
+                        <h2>Order Cancellation Request</h2>
+                        <p>A customer has requested to cancel their order. Please approve or cancel the request:</p>
+
+                        <form action="process_order_cancellation.php" method="post">
+                            <button type="submit"  class="btn btn-info btn-bold px-4 float-right mt-3 mt-lg-0" name="approve">Approve</button>
+                            <button type="submit"  class="btn btn-info btn-bold px-4 float-right mt-3 mt-lg-0" name="cancel">Cancel</button>
+                        </form>
+
+                        
+                        <!-- <div>
                        <a href="#" class="btn btn-info btn-bold px-4 float-right mt-3 mt-lg-0">Pay Now</a>
-                    </div>
+                    </div> -->
+                        
+                        <?php }
+                        else{ ?>
+                            <h5 class="text-muted mb-0"></h5>
+                    <?php } ?>
+
+                    
                 </div>
             </div>
         </div>

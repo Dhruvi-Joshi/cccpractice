@@ -12,7 +12,7 @@ class Core_Model_Resource_Abstract{
     //above all code movr to resource abstract
 
     
-
+    
     public function getPrimaryKey(){
        
         //print_r($abc);
@@ -52,7 +52,7 @@ class Core_Model_Resource_Abstract{
              //echo $sql;
         } else {
             $sql = $this->insertSql($this->getTableName(), $_data);
-            echo $sql;
+            // echo $sql;
             $id = $this->getAdapter()->insert($sql);
             $product->setId($id);
         }

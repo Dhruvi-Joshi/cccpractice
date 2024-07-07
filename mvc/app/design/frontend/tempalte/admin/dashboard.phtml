@@ -1,0 +1,178 @@
+<?php
+$productCount=$this->getProductCount();
+$customerCount=$this->getCustomerCount();
+$orderCount=$this->getOrderCount();
+$categoryCount=$this->getCategoryCount();
+
+$recentOrders=$this->getRecentOrders()->getData();
+
+$recentCustomers=$this->getRecentCustomers()->getData();
+?>
+
+<div class="container mt-4">
+    <h1 class='mb-5 p-2' style='background-color:#76abae;color:white;margin-auto;text-align:center;'>Admin Dashboard</h1>
+  <div class="row">
+    <div class="col-md-3 mb-5">
+    <div class="card" id='productcard' onclick='productlist()' style='cursor:pointer'>
+                <div class="card-body">
+                    <div class="row align-items-center">
+                        <div class="col-auto">
+                            <h5 class="card-title">Total Products</h5>
+                        </div>
+                        <div class="col-auto">
+                            <h2><i class="fa-solid fa-database" style="color: #76abae;"></i></h2>
+                        </div>
+                    </div>
+                    <p class="card-text"><?php echo $productCount;?></p>
+                </div>
+    </div>
+    </div>
+    <div class="col-md-3">
+    <div class="card" onclick='customerlist()' style='cursor:pointer'>
+                <div class="card-body">
+                    <div class="row align-items-center">
+                        <div class="col-auto">
+                            <h5 class="card-title">Total Users</h5>
+                        </div>
+                        <div class="col-auto">
+                            <h2><i class="fa-solid fa-users" style="color: #76abae;"></i></h2>
+                        </div>
+                    </div>
+                    <p class="card-text"><?php echo $customerCount;?></p>
+                </div>
+            </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card" onclick='orderlist()' style='cursor:pointer'>
+      <div class="card-body">
+                    <div class="row align-items-center">
+                        <div class="col-auto">
+                            <h5 class="card-title">Total Orders</h5>
+                        </div>
+                        <div class="col-auto">
+                            <h2><i class="fa-solid fa-circle-check" style="color: #76abae;"></i></h2>
+                        </div>
+                    </div>
+                    <p class="card-text"><?php echo $orderCount;?></p>
+                </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card" onclick='categorylist()' style='cursor:pointer'>
+      <div class="card-body">
+                    <div class="row align-items-center">
+                        <div class="col-auto">
+                            <h5 class="card-title">Total Category</h5>
+                        </div>
+                        <div class="col-auto">
+                            <h2><i class="fa-solid fa-icons" style="color: #76abae;"></i></h2>
+                        </div>
+                    </div>
+                    <p class="card-text"><?php echo $categoryCount;?></p>
+                </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="row mt-4 mb-5">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body">
+        <div class="row align-items-center">
+                        <div class="col">
+                            <h5 class="card-title mb-3"><strong>Recent Orders</strong></h5>
+                        </div>
+                        <div class="col-auto">
+                        
+                        <h6 class="card-title mb-3"><a href="<?php echo $this->getUrl('admin/sales/list');?>" style="text-decoration: none; color: #2E7D32;"><i class="fa-solid fa-eye" style="color: #2E7D32;"></i> Explore All Orders</a></h6>
+
+                        </div>
+                    </div>
+                <?php if(count($recentOrders)):?>    
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Order Number</th>
+                            <th>Grand Total</th>
+                            <!-- <th>Customer ID</th> -->
+                            <th>Status</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        
+                        <?php foreach($recentOrders as $order):?>
+                            <tr>
+                            <td><?php echo $order->getOrderNumber();?></td>
+                            <td><?php echo $order->getGrandTotal();?></td>
+                            <!-- <td><php echo $order->getCustomerId();?></td> -->
+                            <td><?php echo $order->getStatus();?></td>
+                            </tr>
+                        <?php endforeach;?>  
+                        </tbody>
+                    </table>
+                <?php else:?>
+                    <h3 class="text-danger">No orders yet!</h3>
+                <?php endif; ?>        
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body">
+        <div class="row align-items-center">
+                        <div class="col">
+                            <h5 class="card-title mb-3"><strong>Recent Users</strong></h5>
+                        </div>
+                        <div class="col-auto">
+                        <h6 class="card-title mb-3"><a href="<?php echo $this->getUrl('admin/customer/list');?>" style="text-decoration: none; color: #2E7D32;"><i class="fa-solid fa-eye" style="color: #2E7D32;"></i> Explore All Customers</a></h6>
+                        </div>
+                    </div>
+                    <?php if(count($recentCustomers)):?>    
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Customer Id</th>
+                            <th>Name</th>
+                            <th>Email ID</th>
+                            
+                        </tr>
+                        </thead>
+                        <tbody>
+                        
+                        <?php foreach($recentCustomers as $cust):?>
+                            <tr>
+                            <td><?php echo $cust->getcustomer_id();?></td>
+                            <td><?php echo $cust->getFirstName();?></td>
+                            <td><?php echo $cust->getCustomerEmail();?></td>
+                            
+                            </tr>
+                        <?php endforeach;?>  
+                        </tbody>
+                    </table>
+                <?php else:?>
+                    <h3 class="text-danger">No users yet!</h3>
+                <?php endif; ?>        
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+    function productlist()
+    {
+        window.location.href = "<?php echo $this->getUrl('admin/catalog_product/list')?>";
+    }
+    function customerlist()
+    {
+        window.location.href = "<?php echo $this->getUrl('admin/customer/list')?>";
+    }
+    function orderlist()
+    {
+        window.location.href = "<?php echo $this->getUrl('admin/sales/list')?>";
+    }
+    function categorylist()
+    {
+        window.location.href = "<?php echo $this->getUrl('admin/catalog_category/list')?>";
+    }
+</script>    

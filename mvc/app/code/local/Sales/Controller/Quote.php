@@ -100,6 +100,8 @@ class sales_Controller_Quote extends Core_Controller_Front_Action{
         Mage::getSingleton('sales/quote')->addPayId($paymentObj->getId());
 
         Mage::getSingleton('sales/quote')->convert();
+
+        $this->setRedirect("customer/account/history");
         
         
     }

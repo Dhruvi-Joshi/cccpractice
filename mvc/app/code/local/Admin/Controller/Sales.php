@@ -1,10 +1,12 @@
 <?php
-class Admin_Controller_Sales extends Core_Controller_Front_Action{
+class Admin_Controller_Sales extends Core_Controller_Admin_Action{
 
     public function listAction(){
+        
+        $this->getLayout()->setTemplate('core/admin.phtml');
         $layout=$this->getLayout();
-        $layout->getChild("head")->addCss('../../skin/css/header.css');
-        $layout->getChild("head")->addCss('../../skin/css/footer.css');
+        // $layout->getChild("head")->addCss('../../skin/css/header.css');
+        // $layout->getChild("head")->addCss('../../skin/css/footer.css');
         
         
         $child= $layout->getChild("content");
@@ -32,9 +34,10 @@ class Admin_Controller_Sales extends Core_Controller_Front_Action{
     }
 
     public function viewAction(){
+        $this->getLayout()->setTemplate('core/admin.phtml');
         $layout=$this->getLayout();
-        $layout->getChild("head")->addCss('../../skin/css/header.css');
-        $layout->getChild("head")->addCss('../../skin/css/footer.css');
+        // $layout->getChild("head")->addCss('../../skin/css/header.css');
+        // $layout->getChild("head")->addCss('../../skin/css/footer.css');
         
         
         $child= $layout->getChild("content");

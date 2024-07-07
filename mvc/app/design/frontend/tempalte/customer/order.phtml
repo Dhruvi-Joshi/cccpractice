@@ -177,11 +177,13 @@ $history=$this->historyDetails();
 
             
             <hr class="mb-4" style="background-color: #e0e0e0; opacity: 1;">
-            <?php if($order->getStatus()!= 'cancel_request'){  ?>    
+            <?php if($order->getStatus()!= 'cancel_request' ){  ?>    
+              <?php if( $order->getStatus()!= 'Arrived' && $order->getStatus()!= 'collected'){  ?>
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
               <a href="<?php echo $this->getUrl('customer/account/cancel')?>?id=<?php echo $order->getOrder_Id();?>" class="btn btn-danger me-md-2 mb-2 mb-md-0"role="button">Cancel Order</a>
-              <a href="track_order.php" class="btn btn-primary" role="button">View Order Tracking</a>
+              <!-- <a href="track_order.php" class="btn btn-primary" role="button">View Order Tracking</a> -->
             </div>
+            <?php } ?>
             <?php }
             else{ ?>
                 <h5 class="text-muted mb-0">Your request to cancel the order has been sent. Please wait for a response. </h5>

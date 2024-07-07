@@ -8,11 +8,14 @@ class Admin_Controller_Account extends Core_Controller_Front_Action{
     }
 
     public function loginAction(){
-
+    
+        $this->getLayout()->setTemplate('core/admin.phtml');
+        
         // var_dump(Admin_Model_User::USERNAME);
         // var_dump(Admin_Model_User::PASSWORD);
         if (!$this->getRequest()->isPost()) {
             $layout=$this->getLayout();
+            
             $layout->getChild("head")->addCss('../../skin/css/header.css');
             $layout->getChild("head")->addCss('../../skin/css/footer.css');
             
@@ -44,6 +47,17 @@ class Admin_Controller_Account extends Core_Controller_Front_Action{
                 }
             }
     }
+
+    public function dashboardAction(){
+        $this->getLayout()->setTemplate('core/admin.phtml');
+        $layout = $this->getLayout();
+        $child = $layout->getChild('content');
+        $dashboardView = $layout->createBlock('admin/dashboard');
+        $child->addChild('dashboardView', $dashboardView);
+        $layout->toHtml();
+    }
+
+   
 
 }
 

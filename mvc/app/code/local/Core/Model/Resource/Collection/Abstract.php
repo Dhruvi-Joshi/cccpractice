@@ -20,6 +20,14 @@ class Core_Model_Resource_Collection_Abstract{
         return $this;
     }
 
+    public function getOrderByToFilter($filter)
+    {
+  
+      $this->_select['order by'] = $filter;
+      return $this;
+  
+    }
+
     public function getData()
     {
         if (!$this->_isLoaded) {
@@ -55,6 +63,14 @@ class Core_Model_Resource_Collection_Abstract{
         $this->_select['group'][] = $field;
         return $this;
     }
+
+    public function getLimitToFilter($filter)
+  {
+
+    $this->_select['limit'] = $filter;
+    return $this;
+
+  }
 
     public function orderBy()
     {
@@ -115,11 +131,21 @@ class Core_Model_Resource_Collection_Abstract{
             }
             //echo $sql;echo"<br>";
 
+            if (isset($this->_select['order by'])) {
+                $sql .= "ORDER BY {$this->_select['order by']}";
+                // echo $sql;
+              }
+
+              if (isset($this->_select['limit'])) {
+                $sql .= " LIMIT {$this->_select['limit']} ";
+                // echo $sql;die;
+              }
+
             if (isset($this->_select['orderBy']) && count($this->_select['orderBy'])) {
                 $sql .= "ORDER BY {$this->orderBy()}";
 
             }
-            //echo $sql;echo"<br>";
+            // echo $sql;echo"<br>";
             $result = $this->_resource->getAdapter()->fetchAll($sql);
             //print_r($result);
             foreach($result as $row) {

@@ -1,12 +1,14 @@
 <?php
 
-class Admin_Controller_Banner extends Core_Controller_Front_Action{
+class Admin_Controller_Banner extends Core_Controller_Admin_Action{
+
+    protected $_allowAction = [];
 
     public function formAction(){
-       
+        $this->getLayout()->setTemplate('core/admin.phtml');
         $layout=$this->getLayout();
-        $layout->getChild("head")->addCss('../../skin/css/header.css');
-        $layout->getChild("head")->addCss('../../skin/css/footer.css');
+        // $layout->getChild("head")->addCss('../../skin/css/header.css');
+        // $layout->getChild("head")->addCss('../../skin/css/footer.css');
         
         
         $child= $layout->getChild("content");
@@ -49,13 +51,15 @@ class Admin_Controller_Banner extends Core_Controller_Front_Action{
 
         }
         // print_r($data);
+        $this->setRedirect("admin/banner/list");
        
     }
 
     public function listAction(){
+        $this->getLayout()->setTemplate('core/admin.phtml');
         $layout=$this->getLayout();
-        $layout->getChild("head")->addCss('../../skin/css/header.css');
-        $layout->getChild("head")->addCss('../../skin/css/footer.css');
+        // $layout->getChild("head")->addCss('../../skin/css/header.css');
+        // $layout->getChild("head")->addCss('../../skin/css/footer.css');
         
         $child= $layout->getChild("content");
 

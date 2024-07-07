@@ -51,11 +51,11 @@ $select=$this->menuSelect();
                 <form method="POST" action="<?php echo $this->getUrl("admin/sales/save") ?>">
             <tr class="rounded bg-white">
                 <td class="order-color"><?php echo $item->getOrder_id(); ?></td>
-                <td><?php echo $item->getOrder_no(); ?>
+                <td><?php echo $item->getOrder_number(); ?>
             </td>
                 <?php if(isset($customer[$index])): ?>
                 <td class="d-flex align-items-center">
-                    <img src="https://i.imgur.com/C4egmYM.jpg" class="rounded-circle" width="25">
+                    <!-- <img src="https://i.imgur.com/C4egmYM.jpg" class="rounded-circle" width="25"> -->
                     <span class="ml-2"><?php echo $customer[$index]->getCustomer_id(); ?></span>
                 </td>
                 <?php else: ?>
@@ -86,6 +86,7 @@ $select=$this->menuSelect();
                     
                 <input type="hidden" name="status[order_id]" value="<?php echo $item->getOrder_id(); ?>">
                 
+               
                        
                 <select name="status[to_status]" id="status">
                     <?php foreach ($menu as $key => $name) :?>
@@ -94,6 +95,8 @@ $select=$this->menuSelect();
                        
                     <?php endforeach; ?>
                 </select>
+                <?php echo $item->getStatus(); ?>
+                
 
                 </td>
 

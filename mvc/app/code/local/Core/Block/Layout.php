@@ -19,7 +19,10 @@ class Core_Block_Layout extends Core_Block_Template{
         $header=$this->createBlock('page/header');
         //print_r($header);
         $this->addChild('header', $header);
-        //print("<pre>");
+        //print("<pre>");4
+
+        $adminheader = $this->createBlock('page/adminheader');
+        $this->addChild('adminheader', $adminheader);
         
         //print("<pre>");
         $content=$this->createBlock('page/content');
